@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" fill="none">
+  <defs>
+    <linearGradient id="fibreGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0fb5ba"/>
+      <stop offset="100%" stop-color="#0a8f93"/>
+    </linearGradient>
+    <linearGradient id="pulseGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0fb5ba" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0fb5ba" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f1520"/>
+      <stop offset="100%" stop-color="#0a0e17"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="420" rx="16" fill="url(#bgGrad)"/>
+  <rect width="900" height="420" rx="16" fill="none" stroke="#1a2438" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="450" y="38" text-anchor="middle" fill="#e8ecf4" font-family="Inter, sans-serif" font-size="16" font-weight="700">Distributed Fibre Optic Sensing — Three Types of Scattering</text>
+
+  <!-- Interrogator Box -->
+  <rect x="30" y="160" width="110" height="80" rx="8" fill="#141c2b" stroke="#0fb5ba" stroke-width="1.5"/>
+  <text x="85" y="195" text-anchor="middle" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="11" font-weight="600">Interrogator</text>
+  <text x="85" y="215" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="9">Laser + Detector</text>
+
+  <!-- Optical Fibre -->
+  <line x1="140" y1="200" x2="860" y2="200" stroke="url(#fibreGrad)" stroke-width="4" stroke-linecap="round"/>
+  <text x="500" y="225" text-anchor="middle" fill="#5a6478" font-family="Inter, sans-serif" font-size="10">Optical Fibre</text>
+
+  <!-- Laser pulse arrow -->
+  <polygon points="165,200 185,193 185,207" fill="#0fb5ba" filter="url(#glow)"/>
+  <rect x="185" y="196" width="80" height="8" rx="4" fill="url(#pulseGrad)" opacity="0.7"/>
+  <text x="210" y="185" text-anchor="middle" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="9">Laser Pulse</text>
+
+  <!-- Rayleigh Section -->
+  <rect x="280" y="58" width="170" height="110" rx="10" fill="#141c2b" stroke="#0fb5ba" stroke-width="1" stroke-opacity="0.4"/>
+  <circle cx="365" cy="155" r="6" fill="#0fb5ba" opacity="0.6"/>
+  <line x1="365" y1="155" x2="365" y2="125" stroke="#0fb5ba" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+  <text x="365" y="82" text-anchor="middle" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="13" font-weight="700">Rayleigh</text>
+  <text x="365" y="100" text-anchor="middle" fill="#e8ecf4" font-family="Inter, sans-serif" font-size="10">Same frequency</text>
+  <text x="365" y="116" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="9">Strain + Temperature</text>
+  <text x="365" y="132" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="9">+ Vibration (DAS)</text>
+  <text x="365" y="150" text-anchor="middle" fill="#5a6478" font-family="Inter, sans-serif" font-size="8">Res: 1mm — 10m</text>
+
+  <!-- Brillouin Section -->
+  <rect x="480" y="58" width="170" height="110" rx="10" fill="#141c2b" stroke="#e8b84a" stroke-width="1" stroke-opacity="0.4"/>
+  <circle cx="565" cy="155" r="6" fill="#e8b84a" opacity="0.6"/>
+  <line x1="565" y1="155" x2="565" y2="125" stroke="#e8b84a" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+  <text x="565" y="82" text-anchor="middle" fill="#e8b84a" font-family="Inter, sans-serif" font-size="13" font-weight="700">Brillouin</text>
+  <text x="565" y="100" text-anchor="middle" fill="#e8ecf4" font-family="Inter, sans-serif" font-size="10">Frequency shifted</text>
+  <text x="565" y="116" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="9">Strain + Temperature</text>
+  <text x="565" y="132" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="9">BOTDR / BOTDA</text>
+  <text x="565" y="150" text-anchor="middle" fill="#5a6478" font-family="Inter, sans-serif" font-size="8">Res: 0.5m | Range: 50+ km</text>
+
+  <!-- Raman Section -->
+  <rect x="680" y="58" width="170" height="110" rx="10" fill="#141c2b" stroke="#e05a5a" stroke-width="1" stroke-opacity="0.4"/>
+  <circle cx="765" cy="155" r="6" fill="#e05a5a" opacity="0.6"/>
+  <line x1="765" y1="155" x2="765" y2="125" stroke="#e05a5a" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+  <text x="765" y="82" text-anchor="middle" fill="#e05a5a" font-family="Inter, sans-serif" font-size="13" font-weight="700">Raman</text>
+  <text x="765" y="100" text-anchor="middle" fill="#e8ecf4" font-family="Inter, sans-serif" font-size="10">Stokes / Anti-Stokes</text>
+  <text x="765" y="116" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="9">Temperature only</text>
+  <text x="765" y="132" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="9">DTS Systems</text>
+  <text x="765" y="150" text-anchor="middle" fill="#5a6478" font-family="Inter, sans-serif" font-size="8">Res: 0.5m | Range: 30 km</text>
+
+  <!-- Backscatter arrows -->
+  <path d="M340,195 L300,165" stroke="#0fb5ba" stroke-width="1.5" marker-end="url(#arrowTeal)"/>
+  <path d="M540,195 L500,165" stroke="#e8b84a" stroke-width="1.5"/>
+  <path d="M740,195 L700,165" stroke="#e05a5a" stroke-width="1.5"/>
+
+  <!-- Applications Row -->
+  <text x="450" y="270" text-anchor="middle" fill="#5a6478" font-family="Inter, sans-serif" font-size="11" font-weight="600" letter-spacing="2">APPLICATIONS</text>
+
+  <!-- App boxes -->
+  <rect x="55" y="290" width="150" height="55" rx="8" fill="#141c2b" stroke="#1a2438" stroke-width="1"/>
+  <text x="130" y="313" text-anchor="middle" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="10" font-weight="600">Tunnels &amp; Slopes</text>
+  <text x="130" y="330" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="9">Strain profiling</text>
+
+  <rect x="225" y="290" width="150" height="55" rx="8" fill="#141c2b" stroke="#1a2438" stroke-width="1"/>
+  <text x="300" y="313" text-anchor="middle" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="10" font-weight="600">Pipelines</text>
+  <text x="300" y="330" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="9">Leak &amp; movement detection</text>
+
+  <rect x="395" y="290" width="150" height="55" rx="8" fill="#141c2b" stroke="#1a2438" stroke-width="1"/>
+  <text x="470" y="313" text-anchor="middle" fill="#e8b84a" font-family="Inter, sans-serif" font-size="10" font-weight="600">Piles &amp; Foundations</text>
+  <text x="470" y="330" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="9">Load transfer profiles</text>
+
+  <rect x="565" y="290" width="150" height="55" rx="8" fill="#141c2b" stroke="#1a2438" stroke-width="1"/>
+  <text x="640" y="313" text-anchor="middle" fill="#e8b84a" font-family="Inter, sans-serif" font-size="10" font-weight="600">Embankments</text>
+  <text x="640" y="330" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="9">Long-range monitoring</text>
+
+  <rect x="735" y="290" width="150" height="55" rx="8" fill="#141c2b" stroke="#1a2438" stroke-width="1"/>
+  <text x="810" y="313" text-anchor="middle" fill="#e05a5a" font-family="Inter, sans-serif" font-size="10" font-weight="600">Dams &amp; Levees</text>
+  <text x="810" y="330" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="9">Seepage &amp; temperature</text>
+
+  <!-- Footer -->
+  <text x="450" y="390" text-anchor="middle" fill="#5a6478" font-family="Inter, sans-serif" font-size="10">geomonix.com | Dr Reza Movahedifar</text>
+</svg>

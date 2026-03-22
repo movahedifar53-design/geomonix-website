@@ -54,6 +54,21 @@
     color: var(--text-secondary);
 }
 
+/* Blog Hero Image */
+.blog-hero-image {
+    max-width: 900px;
+    margin: 0 auto 48px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.blog-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* Blog Content */
 .blog-content {
     max-width: 760px;
