@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online geotechnical calculator - bearing capacity (Terzaghi, Meyerhof, Hansen), settlement, lateral earth pressure. By Dr Reza Movahedifar.">
+    <meta name="keywords" content="bearing capacity calculator, Terzaghi bearing capacity, Meyerhof bearing capacity, settlement calculator, lateral earth pressure, Rankine, geotechnical calculator, free engineering tools">
+    <meta name="author" content="Dr Reza Movahedifar">
+    <title>Geotechnical Calculator | Bearing Capacity, Settlement, Earth Pressure | GeoMonix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .calc-page { padding-top: calc(var(--nav-height) + 40px); padding-bottom: 80px; }
+        .calc-header { text-align: center; margin-bottom: 48px; }
+        .calc-header h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
+        .calc-header p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+
+        .calc-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; justify-content: center; }
+        .calc-tab { padding: 10px 24px; border-radius: 50px; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+            background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary); transition: all 0.3s ease; }
+        .calc-tab:hover { border-color: var(--accent); color: var(--accent); }
+        .calc-tab.active { background: var(--gradient-accent); color: var(--bg-primary); border-color: transparent; }
+
+        .calc-panel { display: none; }
+        .calc-panel.active { display: block; }
+
+        .calc-container { max-width: 800px; margin: 0 auto; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+        .calc-field { display: flex; flex-direction: column; gap: 6px; }
+        .calc-field label { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
+        .calc-field label span { font-weight: 400; color: var(--text-muted); font-size: 0.8rem; }
+        .calc-field input, .calc-field select {
+            padding: 10px 14px; background: var(--bg-primary); border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm); color: var(--text-primary); font-size: 0.9rem;
+            font-family: var(--font-mono); outline: none; transition: border-color 0.3s ease; }
+        .calc-field input:focus, .calc-field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .calc-field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%238892a4' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+        .calc-field select option { background: var(--bg-card); }
+
+        .calc-btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 40px;
+            font-size: 1rem; font-weight: 700; border-radius: 50px; cursor: pointer; border: none;
+            background: var(--gradient-accent); color: var(--bg-primary); font-family: var(--font-main);
+            transition: all 0.3s ease; margin-top: 8px; }
+        .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow-strong); }
+
+        .calc-results { margin-top: 32px; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 28px; display: none; }
+        .calc-results.show { display: block; }
+        .calc-results h3 { font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+        .result-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .result-row:last-child { border-bottom: none; }
+        .result-label { color: var(--text-secondary); font-size: 0.9rem; }
+        .result-value { font-family: var(--font-mono); font-weight: 600; color: var(--text-primary); font-size: 0.95rem; }
+        .result-highlight .result-value { color: var(--accent); font-size: 1.1rem; }
+
+        .calc-note { margin-top: 20px; padding: 16px; background: var(--accent-glow); border: 1px solid rgba(15,181,186,0.2);
+            border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+        .calc-note strong { color: var(--accent); }
+
+        .calc-cta { text-align: center; margin-top: 48px; padding: 40px; background: var(--bg-card);
+            border: 1px solid var(--border); border-radius: var(--radius-lg); }
+        .calc-cta h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; }
+        .calc-cta p { color: var(--text-secondary); margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        @media (max-width: 768px) {
+            .calc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-geo">Geo</span><span class="logo-monix">Monix</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../index.html#consulting" class="nav-link">Consulting</a></li>
+                <li><a href="../index.html#tutoring" class="nav-link">Tutoring</a></li>
+                <li><a href="../index.html#contact" class="nav-link nav-cta">Get in Touch</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="calc-page">
+        <div class="container">
+            <div class="calc-header">
+                <span class="section-tag">Free Tool</span>
+                <h1>Geotechnical Calculator</h1>
+                <p>Professional-grade calculations for bearing capacity, settlement, and lateral earth pressure. Built by a PhD geotechnical engineer.</p>
+            </div>
+
+            <div class="calc-container">
+                <div class="calc-tabs">
+                    <div class="calc-tab active" data-tab="bearing">Bearing Capacity</div>
+                    <div class="calc-tab" data-tab="settlement">Settlement</div>
+                    <div class="calc-tab" data-tab="earth-pressure">Earth Pressure</div>
+                </div>
+
+                <!-- ═══════ BEARING CAPACITY ═══════ -->
+                <div class="calc-panel active" id="bearing">
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label>Method</label>
+                            <select id="bc-method">
+                                <option value="terzaghi">Terzaghi (1943)</option>
+                                <option value="meyerhof">Meyerhof (1963)</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label>Foundation Shape</label>
+                            <select id="bc-shape">
+                                <option value="strip">Strip / Continuous</option>
+                                <option value="square">Square</option>
+                                <option value="circular">Circular</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label>Cohesion, c' <span>(kPa)</span></label>
+                            <input type="number" id="bc-cohesion" value="10" step="0.1">
+                        </div>
+                        <div class="calc-field">
+                            <label>Friction Angle, &phi;' <span>(degrees)</span></label>
+                            <input type="number" id="bc-phi" value="30" step="0.5">
+                        </div>
+                        <div class="calc-field">
+                            <label>Unit Weight, &gamma; <span>(kN/m&sup3;)</span></label>
+                            <input type="number" id="bc-gamma" value="18" step="0.1">
+                        </div>
+                        <div class="calc-field">
+                            <label>Foundation Width, B <span>(m)</span></label>
+                            <input type="number" id="bc-width" value="2" step="0.1">
+                        </div>
+                        <div class="calc-field">
+                            <label>Foundation Depth, D<sub>f</sub> <span>(m)</span></label>
+                            <input type="number" id="bc-depth" value="1" step="0.1">
+                        </div>
+                        <div class="calc-field">
+                            <label>Factor of Safety</label>
+                            <input type="number" id="bc-fos" value="3" step="0.5">
+                        </div>
+                    </div>
+                    <button class="calc-btn" onclick="calcBearing()">Calculate Bearing Capacity</button>
+                    <div class="calc-results" id="bc-results">
+                        <h3>Results</h3>
+                        <div id="bc-results-body"></div>
+                        <div class="calc-note">
+                            <strong>Note:</strong> This is a simplified calculation for preliminary assessment only.
+                            For detailed design, consider water table effects, load inclination, foundation shape factors,
+                            and site-specific conditions. <a href="../index.html#contact">Contact GeoMonix</a> for professional analysis.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══════ SETTLEMENT ═══════ -->
+                <div class="calc-panel" id="settlement">
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label>Method</label>
+                            <select id="st-method">
+                                <option value="elastic">Elastic Settlement</option>
+                                <option value="consolidation">1D Consolidation</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label>Applied Stress, &Delta;&sigma; <span>(kPa)</span></label>
+                            <input type="number" id="st-stress" value="100" step="1">
+                        </div>
+                        <div class="calc-field">
+                            <label>Layer Thickness, H <span>(m)</span></label>
+                            <input type="number" id="st-thickness" value="5" step="0.1">
+                        </div>
+                        <div class="calc-field">
+                            <label>Young's Modulus, E <span>(MPa)</span></label>
+                            <input type="number" id="st-modulus" value="20" step="0.5">
+                        </div>
+                        <div class="calc-field" id="st-cc-field">
+                            <label>Compression Index, C<sub>c</sub></label>
+                            <input type="number" id="st-cc" value="0.3" step="0.01">
+                        </div>
+                        <div class="calc-field" id="st-e0-field">
+                            <label>Initial Void Ratio, e<sub>0</sub></label>
+                            <input type="number" id="st-e0" value="0.8" step="0.01">
+                        </div>
+                        <div class="calc-field" id="st-sigma0-field">
+                            <label>Initial Effective Stress, &sigma;'<sub>0</sub> <span>(kPa)</span></label>
+                            <input type="number" id="st-sigma0" value="50" step="1">
+                        </div>
+                        <div class="calc-field">
+                            <label>Foundation Width, B <span>(m)</span></label>
+                            <input type="number" id="st-width" value="2" step="0.1">
+                        </div>
+                    </div>
+                    <button class="calc-btn" onclick="calcSettlement()">Calculate Settlement</button>
+                    <div class="calc-results" id="st-results">
+                        <h3>Results</h3>
+                        <div id="st-results-body"></div>
+                        <div class="calc-note">
+                            <strong>Note:</strong> Elastic settlement uses the Boussinesq influence factor approach.
+                            Consolidation uses 1D oedometer theory. For complex soil profiles, use FEA modelling.
+                            <a href="../index.html#contact">Contact GeoMonix</a> for ABAQUS-based analysis.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══════ EARTH PRESSURE ═══════ -->
+                <div class="calc-panel" id="earth-pressure">
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label>Method</label>
+                            <select id="ep-method">
+                                <option value="rankine">Rankine</option>
+                                <option value="coulomb">Coulomb</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label>Pressure Type</label>
+                            <select id="ep-type">
+                                <option value="active">Active</option>
+                                <option value="passive">Passive</option>
+                                <option value="atrest">At-Rest (K₀)</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label>Friction Angle, &phi;' <span>(degrees)</span></label>
+                            <input type="number" id="ep-phi" value="30" step="0.5">
+                        </div>
+                        <div class="calc-field">
+                            <label>Cohesion, c' <span>(kPa)</span></label>
+                            <input type="number" id="ep-cohesion" value="0" step="0.1">
+                        </div>
+                        <div class="calc-field">
+                            <label>Unit Weight, &gamma; <span>(kN/m&sup3;)</span></label>
+                            <input type="number" id="ep-gamma" value="18" step="0.1">
+                        </div>
+                        <div class="calc-field">
+                            <label>Wall Height, H <span>(m)</span></label>
+                            <input type="number" id="ep-height" value="5" step="0.1">
+                        </div>
+                        <div class="calc-field" id="ep-delta-field">
+                            <label>Wall Friction, &delta; <span>(degrees)</span></label>
+                            <input type="number" id="ep-delta" value="20" step="0.5">
+                        </div>
+                        <div class="calc-field" id="ep-beta-field">
+                            <label>Backfill Slope, &beta; <span>(degrees)</span></label>
+                            <input type="number" id="ep-beta" value="0" step="0.5">
+                        </div>
+                    </div>
+                    <button class="calc-btn" onclick="calcEarthPressure()">Calculate Earth Pressure</button>
+                    <div class="calc-results" id="ep-results">
+                        <h3>Results</h3>
+                        <div id="ep-results-body"></div>
+                        <div class="calc-note">
+                            <strong>Note:</strong> Rankine assumes a smooth vertical wall. Coulomb accounts for wall friction.
+                            For complex geometries, surcharge loads, or water table effects,
+                            <a href="../index.html#contact">contact GeoMonix</a> for detailed analysis.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-cta">
+                    <h3>Need More Advanced Analysis?</h3>
+                    <p>These calculators cover preliminary estimates. For detailed FEA modelling, complex soil profiles, or professional reporting, get in touch.</p>
+                    <a href="../index.html#contact" class="btn btn-primary">Book a Consultation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 GeoMonix. All rights reserved. | Dr Reza Movahedifar</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // Tab switching
+    document.querySelectorAll('.calc-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById(tab.dataset.tab).classList.add('active');
+        });
+    });
+
+    // Toggle consolidation fields
+    document.getElementById('st-method').addEventListener('change', function() {
+        const isConsol = this.value === 'consolidation';
+        document.getElementById('st-cc-field').style.display = isConsol ? '' : 'none';
+        document.getElementById('st-e0-field').style.display = isConsol ? '' : 'none';
+        document.getElementById('st-sigma0-field').style.display = isConsol ? '' : 'none';
+    });
+
+    // Toggle Coulomb fields
+    document.getElementById('ep-method').addEventListener('change', function() {
+        const isCoulomb = this.value === 'coulomb';
+        document.getElementById('ep-delta-field').style.display = isCoulomb ? '' : 'none';
+        document.getElementById('ep-beta-field').style.display = isCoulomb ? '' : 'none';
+    });
+
+    function toRad(deg) { return deg * Math.PI / 180; }
+
+    // ═══════ BEARING CAPACITY ═══════
+    function calcBearing() {
+        const method = document.getElementById('bc-method').value;
+        const shape = document.getElementById('bc-shape').value;
+        const c = parseFloat(document.getElementById('bc-cohesion').value);
+        const phi = parseFloat(document.getElementById('bc-phi').value);
+        const gamma = parseFloat(document.getElementById('bc-gamma').value);
+        const B = parseFloat(document.getElementById('bc-width').value);
+        const Df = parseFloat(document.getElementById('bc-depth').value);
+        const FoS = parseFloat(document.getElementById('bc-fos').value);
+        const phiRad = toRad(phi);
+
+        let Nc, Nq, Ngamma, qu;
+        const q = gamma * Df;
+
+        if (method === 'terzaghi') {
+            // Terzaghi bearing capacity factors
+            Nq = Math.exp(2 * Math.PI * (0.75 - phi/360) * Math.tan(phiRad)) / (2 * Math.pow(Math.cos(toRad(45 + phi/2)), 2));
+            Nc = (Nq - 1) / Math.tan(phiRad);
+            Ngamma = 2 * (Nq + 1) * Math.tan(phiRad);
+
+            if (phi === 0) { Nc = 5.7; Nq = 1; Ngamma = 0; }
+
+            if (shape === 'strip') {
+                qu = c * Nc + q * Nq + 0.5 * gamma * B * Ngamma;
+            } else if (shape === 'square') {
+                qu = 1.3 * c * Nc + q * Nq + 0.4 * gamma * B * Ngamma;
+            } else {
+                qu = 1.3 * c * Nc + q * Nq + 0.3 * gamma * B * Ngamma;
+            }
+        } else {
+            // Meyerhof bearing capacity factors
+            Nq = Math.exp(Math.PI * Math.tan(phiRad)) * Math.pow(Math.tan(toRad(45 + phi/2)), 2);
+            Nc = (Nq - 1) / Math.tan(phiRad);
+            Ngamma = 2 * (Nq + 1) * Math.tan(phiRad);
+
+            if (phi === 0) { Nc = 5.14; Nq = 1; Ngamma = 0; }
+
+            // Shape factors (Meyerhof)
+            let sc = 1, sq = 1, sg = 1;
+            if (shape === 'square' || shape === 'circular') {
+                sc = 1 + 0.2 * Nq / Nc;
+                sq = 1 + 0.1 * Math.pow(Math.tan(toRad(45 + phi/2)), 2);
+                sg = sq;
+            }
+            // Depth factors
+            let dc = 1 + 0.2 * (Df/B) * Math.tan(toRad(45 + phi/2));
+            let dq = 1 + 0.1 * (Df/B) * Math.tan(toRad(45 + phi/2));
+            let dg = dq;
+
+            qu = c * Nc * sc * dc + q * Nq * sq * dq + 0.5 * gamma * B * Ngamma * sg * dg;
+        }
+
+        const qallow = qu / FoS;
+
+        const html = `
+            <div class="result-row"><span class="result-label">N<sub>c</sub></span><span class="result-value">${Nc.toFixed(2)}</span></div>
+            <div class="result-row"><span class="result-label">N<sub>q</sub></span><span class="result-value">${Nq.toFixed(2)}</span></div>
+            <div class="result-row"><span class="result-label">N<sub>&gamma;</sub></span><span class="result-value">${Ngamma.toFixed(2)}</span></div>
+            <div class="result-row"><span class="result-label">Surcharge, q = &gamma; &times; D<sub>f</sub></span><span class="result-value">${q.toFixed(1)} kPa</span></div>
+            <div class="result-row"><span class="result-label">Ultimate Bearing Capacity, q<sub>u</sub></span><span class="result-value">${qu.toFixed(1)} kPa</span></div>
+            <div class="result-row result-highlight"><span class="result-label"><strong>Allowable Bearing Capacity, q<sub>a</sub> (FoS = ${FoS})</strong></span><span class="result-value">${qallow.toFixed(1)} kPa</span></div>
+        `;
+        document.getElementById('bc-results-body').innerHTML = html;
+        document.getElementById('bc-results').classList.add('show');
+    }
+
+    // ═══════ SETTLEMENT ═══════
+    function calcSettlement() {
+        const method = document.getElementById('st-method').value;
+        const dSigma = parseFloat(document.getElementById('st-stress').value);
+        const H = parseFloat(document.getElementById('st-thickness').value);
+        const E = parseFloat(document.getElementById('st-modulus').value);
+        const B = parseFloat(document.getElementById('st-width').value);
+
+        let settlement, html;
+
+        if (method === 'elastic') {
+            // Elastic settlement: S = q * B * (1 - v^2) * I / E
+            const v = 0.3; // assumed Poisson's ratio
+            const I = 1.0; // influence factor for flexible foundation
+            settlement = (dSigma * B * (1 - v*v) * I / (E * 1000)) * 1000; // in mm
+
+            html = `
+                <div class="result-row"><span class="result-label">Applied Stress, &Delta;&sigma;</span><span class="result-value">${dSigma} kPa</span></div>
+                <div class="result-row"><span class="result-label">Young's Modulus, E</span><span class="result-value">${E} MPa</span></div>
+                <div class="result-row"><span class="result-label">Poisson's Ratio (assumed)</span><span class="result-value">0.3</span></div>
+                <div class="result-row"><span class="result-label">Influence Factor, I</span><span class="result-value">1.0</span></div>
+                <div class="result-row result-highlight"><span class="result-label"><strong>Elastic Settlement</strong></span><span class="result-value">${settlement.toFixed(1)} mm</span></div>
+            `;
+        } else {
+            const Cc = parseFloat(document.getElementById('st-cc').value);
+            const e0 = parseFloat(document.getElementById('st-e0').value);
+            const sigma0 = parseFloat(document.getElementById('st-sigma0').value);
+
+            // 1D Consolidation: S = (Cc * H / (1 + e0)) * log10((sigma0 + dSigma) / sigma0)
+            settlement = (Cc * H / (1 + e0)) * Math.log10((sigma0 + dSigma) / sigma0) * 1000; // in mm
+
+            html = `
+                <div class="result-row"><span class="result-label">Compression Index, C<sub>c</sub></span><span class="result-value">${Cc}</span></div>
+                <div class="result-row"><span class="result-label">Initial Void Ratio, e<sub>0</sub></span><span class="result-value">${e0}</span></div>
+                <div class="result-row"><span class="result-label">Initial Effective Stress, &sigma;'<sub>0</sub></span><span class="result-value">${sigma0} kPa</span></div>
+                <div class="result-row"><span class="result-label">Stress Ratio, (&sigma;'<sub>0</sub> + &Delta;&sigma;) / &sigma;'<sub>0</sub></span><span class="result-value">${((sigma0 + dSigma) / sigma0).toFixed(2)}</span></div>
+                <div class="result-row result-highlight"><span class="result-label"><strong>Consolidation Settlement</strong></span><span class="result-value">${settlement.toFixed(1)} mm</span></div>
+            `;
+        }
+
+        document.getElementById('st-results-body').innerHTML = html;
+        document.getElementById('st-results').classList.add('show');
+    }
+
+    // ═══════ EARTH PRESSURE ═══════
+    function calcEarthPressure() {
+        const method = document.getElementById('ep-method').value;
+        const type = document.getElementById('ep-type').value;
+        const phi = parseFloat(document.getElementById('ep-phi').value);
+        const c = parseFloat(document.getElementById('ep-cohesion').value);
+        const gamma = parseFloat(document.getElementById('ep-gamma').value);
+        const H = parseFloat(document.getElementById('ep-height').value);
+        const phiRad = toRad(phi);
+
+        let K, label, pressure, force, html;
+
+        if (type === 'atrest') {
+            K = 1 - Math.sin(phiRad); // Jaky's formula
+            label = 'K₀ (At-Rest)';
+        } else if (method === 'rankine') {
+            if (type === 'active') {
+                K = Math.pow(Math.tan(toRad(45 - phi/2)), 2);
+                label = 'Ka (Rankine)';
+            } else {
+                K = Math.pow(Math.tan(toRad(45 + phi/2)), 2);
+                label = 'Kp (Rankine)';
+            }
+        } else {
+            // Coulomb
+            const delta = parseFloat(document.getElementById('ep-delta').value);
+            const beta = parseFloat(document.getElementById('ep-beta').value);
+            const deltaRad = toRad(delta);
+            const betaRad = toRad(beta);
+
+            if (type === 'active') {
+                const num = Math.pow(Math.sin(toRad(90 + phi)), 2);
+                const a = Math.sin(toRad(90 - delta));
+                const b = Math.sin(phiRad + deltaRad) * Math.sin(phiRad - betaRad);
+                const c2 = Math.sin(toRad(90 + beta));
+                const denom = Math.pow(Math.sin(toRad(90 - delta)), 2) * Math.pow(1 + Math.sqrt(b / (a * c2)), 2);
+                K = num / denom;
+                label = `Ka (Coulomb, δ=${delta}°, β=${beta}°)`;
+            } else {
+                const num = Math.pow(Math.sin(toRad(90 - phi)), 2);
+                const a = Math.sin(toRad(90 + delta));
+                const b = Math.sin(phiRad + deltaRad) * Math.sin(phiRad + betaRad);
+                const c2 = Math.sin(toRad(90 + beta));
+                const denom = Math.pow(Math.sin(toRad(90 + delta)), 2) * Math.pow(1 - Math.sqrt(b / (a * c2)), 2);
+                K = num / denom;
+                label = `Kp (Coulomb, δ=${delta}°, β=${beta}°)`;
+            }
+        }
+
+        // Pressure at base
+        const cohesionTerm = type === 'active' ? -2 * c * Math.sqrt(K) : 2 * c * Math.sqrt(K);
+        pressure = K * gamma * H + cohesionTerm;
+        force = 0.5 * K * gamma * H * H;
+
+        html = `
+            <div class="result-row"><span class="result-label">${label}</span><span class="result-value">${K.toFixed(4)}</span></div>
+            <div class="result-row"><span class="result-label">Lateral Pressure at Base</span><span class="result-value">${pressure.toFixed(1)} kPa</span></div>
+            <div class="result-row result-highlight"><span class="result-label"><strong>Total Force per metre run</strong></span><span class="result-value">${force.toFixed(1)} kN/m</span></div>
+            <div class="result-row"><span class="result-label">Point of Application (from base)</span><span class="result-value">${(H/3).toFixed(2)} m</span></div>
+        `;
+
+        document.getElementById('ep-results-body').innerHTML = html;
+        document.getElementById('ep-results').classList.add('show');
+    }
+
+    // Mobile nav
+    document.getElementById('navToggle').addEventListener('click', () => {
+        document.getElementById('navToggle').classList.toggle('active');
+        document.getElementById('navMenu').classList.toggle('active');
+    });
+    </script>
+</body>
+</html>
