@@ -109,22 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
 
-            // If using Formspree or similar, uncomment the fetch below
-            // For now, show a success message
-            setTimeout(() => {
-                submitBtn.textContent = 'Message Sent!';
-                submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-
-                setTimeout(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.style.background = '';
-                    submitBtn.disabled = false;
-                    contactForm.reset();
-                }, 3000);
-            }, 1000);
-
-            /*
-            // Uncomment this when you set up Formspree:
             fetch(this.action, {
                 method: 'POST',
                 body: formData,
@@ -147,7 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.textContent = 'Error - Try Again';
                 submitBtn.disabled = false;
             });
-            */
         });
     }
 
