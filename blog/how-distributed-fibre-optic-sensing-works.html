@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How does distributed fibre optic sensing (DFOS) actually work? A clear explanation of the physics behind Brillouin, Rayleigh, and Raman scattering in optical fibres for engineers and asset managers.">
+    <meta name="keywords" content="how fibre optic sensing works, DFOS explained, Brillouin scattering, Rayleigh scattering, Raman scattering, optical fibre physics, OTDR, distributed sensing, strain measurement, temperature measurement">
+    <meta name="author" content="Dr Reza Movahedifar">
+    <meta property="og:title" content="How Distributed Fibre Optic Sensing Works: The Physics Explained Simply | GeoMonix">
+    <meta property="og:description" content="A clear, visual explanation of how light in an optical fibre can measure strain, temperature, and vibration over kilometres. No physics degree required.">
+    <meta property="og:type" content="article">
+    <title>How Distributed Fibre Optic Sensing Works: The Physics Explained Simply | GeoMonix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-geo">Geo</span><span class="logo-monix">Monix</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
+                <li><a href="../index.html#consulting" class="nav-link">Consulting</a></li>
+                <li><a href="../index.html#contact" class="nav-link nav-cta">Get in Touch</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <div class="container">
+            <div class="blog-header">
+                <div class="blog-meta">
+                    <span class="blog-tag">Fibre Optics</span>
+                    <span class="blog-tag">Fundamentals</span>
+                    <time datetime="2026-03-23">23 March 2026</time>
+                </div>
+                <h1>How Distributed Fibre Optic Sensing Works: The Physics Explained Simply</h1>
+                <p class="blog-author">By <strong>Dr Reza Movahedifar</strong> &mdash; PhD Civil Engineering, University of Birmingham</p>
+            </div>
+
+            <div class="blog-content">
+                <p class="blog-lead">
+                    You've heard that fibre optic sensing can turn a single cable into thousands of sensors.
+                    But how does light inside a glass fibre actually measure strain, temperature, or vibration?
+                    This article explains the physics in plain language &mdash; no optics degree required.
+                </p>
+
+                <h2>The Basic Principle: Light Tells You What's Happening</h2>
+                <p>
+                    An optical fibre is a thin strand of glass (about 125 &mu;m in diameter &mdash; thinner than
+                    a human hair) that guides light along its core through total internal reflection. In
+                    telecommunications, this light carries data. In sensing, the light itself <em>is</em> the data.
+                </p>
+                <p>
+                    When a pulse of laser light travels through a fibre, most of it goes straight through.
+                    But a tiny fraction &mdash; less than 0.001% &mdash; is <strong>scattered</strong> backwards
+                    by the glass molecules. This backscattered light carries information about the local
+                    conditions (temperature, strain, vibration) at every point along the fibre.
+                </p>
+                <p>
+                    By analysing <em>what</em> comes back and <em>when</em> it arrives, an interrogator unit
+                    can determine what's happening at every metre (or even every millimetre) along a
+                    fibre that could be kilometres long. This is the essence of distributed fibre optic sensing.
+                </p>
+
+                <h2>Time-of-Flight: Knowing Where</h2>
+                <p>
+                    The "distributed" part relies on a simple concept: the speed of light is known.
+                    When a short laser pulse enters the fibre, the interrogator starts a clock. Light
+                    scattered from a point 1 km away takes longer to return than light scattered from
+                    a point 100 m away. By measuring the arrival time of backscattered light, the system
+                    calculates exactly where along the fibre each measurement comes from.
+                </p>
+                <p>
+                    This is fundamentally the same principle as radar (which uses radio waves) or sonar
+                    (which uses sound waves). In fibre optics, it's called <strong>Optical Time-Domain
+                    Reflectometry (OTDR)</strong> &mdash; and it's the foundation of all distributed sensing systems.
+                </p>
+                <p>
+                    The spatial resolution (how closely spaced the measurements are) depends on the
+                    pulse width: a shorter pulse gives finer resolution but weaker signal. This is a
+                    fundamental trade-off in all DFOS systems.
+                </p>
+
+                <h2>Three Types of Scattering: What You Measure</h2>
+                <p>
+                    Not all scattered light is the same. When photons interact with the glass molecules,
+                    three distinct types of scattering occur, each sensitive to different physical quantities.
+                    Understanding these is key to choosing the right DFOS technology for your application.
+                </p>
+
+                <h3>1. Rayleigh Scattering &mdash; The Strongest Signal</h3>
+                <p>
+                    Rayleigh scattering occurs when light interacts with tiny inhomogeneities in the glass
+                    structure (density fluctuations frozen in during manufacturing). The scattered light has
+                    the <strong>same frequency</strong> as the input light &mdash; it's elastic scattering.
+                </p>
+                <p>
+                    Every fibre has a unique, random pattern of these inhomogeneities &mdash; like a fingerprint.
+                    When the fibre is stretched or heated, this pattern shifts slightly. By comparing the current
+                    pattern to a baseline, the system can detect changes in strain or temperature with
+                    extraordinary precision.
+                </p>
+                <p>
+                    <strong>Key technology:</strong> Optical Frequency Domain Reflectometry (OFDR) exploits
+                    Rayleigh scattering to achieve spatial resolutions as fine as <strong>1 mm</strong> over
+                    distances up to ~70 m, or ~1 m resolution over several kilometres. This makes it the
+                    highest-resolution distributed sensing technology available.
+                </p>
+                <p>
+                    <strong>Also used in:</strong> Distributed Acoustic Sensing (DAS), which measures
+                    vibrations and acoustic signals by detecting rapid changes in the Rayleigh backscatter
+                    pattern. DAS is widely used for seismic monitoring, pipeline surveillance, and perimeter security.
+                </p>
+
+                <h3>2. Brillouin Scattering &mdash; The Workhorse</h3>
+                <p>
+                    Brillouin scattering occurs when light interacts with <strong>acoustic phonons</strong>
+                    (sound waves) propagating through the glass. Unlike Rayleigh scattering, the scattered
+                    light is shifted in frequency &mdash; this shift is called the <strong>Brillouin frequency
+                    shift</strong>, and it's directly proportional to both strain and temperature.
+                </p>
+                <p>
+                    At room temperature in standard telecom fibre, the Brillouin frequency shift is approximately
+                    <strong>10.8&ndash;11.0 GHz</strong>. When the fibre is stretched, this frequency increases
+                    by about <strong>0.05 MHz per microstrain</strong>. When heated, it increases by about
+                    <strong>1.1 MHz per &deg;C</strong>. By measuring this shift at every point along the fibre,
+                    you get a continuous profile of strain and/or temperature.
+                </p>
+                <p>
+                    <strong>Key technologies:</strong>
+                </p>
+                <ul>
+                    <li><strong>BOTDR</strong> (Brillouin Optical Time-Domain Reflectometry): Uses a single-ended
+                    measurement &mdash; light goes in one end and scattered light is measured from the same end.
+                    Simpler installation but lower signal-to-noise ratio. Range up to 50+ km.</li>
+                    <li><strong>BOTDA</strong> (Brillouin Optical Time-Domain Analysis): Uses a two-ended measurement
+                    with a pump pulse from one end and a continuous probe wave from the other. Stimulated Brillouin
+                    scattering amplifies the signal, giving higher accuracy. Requires access to both ends of the fibre.</li>
+                </ul>
+                <p>
+                    Brillouin-based systems are the <strong>workhorse of geotechnical monitoring</strong> because
+                    they offer a practical balance of range (up to 50+ km), spatial resolution (0.5&ndash;1 m),
+                    and strain/temperature accuracy.
+                </p>
+
+                <h3>3. Raman Scattering &mdash; Temperature Specialist</h3>
+                <p>
+                    Raman scattering occurs when light interacts with <strong>molecular vibrations</strong>
+                    in the glass. It produces two scattered components:
+                </p>
+                <ul>
+                    <li><strong>Stokes</strong> component &mdash; shifted to a lower frequency (longer wavelength).
+                    Its intensity is relatively insensitive to temperature.</li>
+                    <li><strong>Anti-Stokes</strong> component &mdash; shifted to a higher frequency (shorter wavelength).
+                    Its intensity is <em>strongly</em> dependent on temperature.</li>
+                </ul>
+                <p>
+                    By measuring the <strong>ratio of Anti-Stokes to Stokes intensity</strong>, the system
+                    calculates the temperature at each point along the fibre. Crucially, Raman scattering
+                    is <strong>insensitive to strain</strong> &mdash; which means you get a pure temperature
+                    measurement without cross-sensitivity issues.
+                </p>
+                <p>
+                    <strong>Key technology:</strong> Distributed Temperature Sensing (DTS) systems use Raman
+                    scattering and are widely deployed for:
+                </p>
+                <ul>
+                    <li>Pipeline leak detection (water or gas leaks cause local temperature changes)</li>
+                    <li>Power cable hot-spot monitoring</li>
+                    <li>Fire detection in tunnels</li>
+                    <li>Dam and levee seepage monitoring</li>
+                    <li>Geothermal well profiling</li>
+                </ul>
+
+                <h2>Comparison: Which Scattering Type for What?</h2>
+                <div class="blog-table-wrapper">
+                    <table class="blog-table">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>Rayleigh</th>
+                                <th>Brillouin</th>
+                                <th>Raman</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Signal strength</strong></td>
+                                <td>Strongest</td>
+                                <td>Medium</td>
+                                <td>Weakest</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Measures strain?</strong></td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Measures temperature?</strong></td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                                <td>Yes (pure)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Measures vibration?</strong></td>
+                                <td>Yes (DAS)</td>
+                                <td>No</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Typical range</strong></td>
+                                <td>70 m (OFDR) to 40 km (DAS)</td>
+                                <td>Up to 50+ km</td>
+                                <td>Up to 30 km</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Best spatial resolution</strong></td>
+                                <td>1 mm (OFDR)</td>
+                                <td>0.5 m</td>
+                                <td>0.5 m</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cross-sensitivity</strong></td>
+                                <td>Strain/temperature coupled</td>
+                                <td>Strain/temperature coupled</td>
+                                <td>Temperature only</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Best for</strong></td>
+                                <td>High-res structural, vibration/acoustic</td>
+                                <td>Long-range geotechnical</td>
+                                <td>Temperature profiling, leak detection</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>The Temperature-Strain Cross-Sensitivity Problem</h2>
+                <p>
+                    One of the biggest practical challenges in DFOS is that both Brillouin and Rayleigh
+                    scattering are sensitive to <em>both</em> strain and temperature simultaneously. If
+                    your Brillouin frequency shift changes, is it because the ground moved (strain) or
+                    because the temperature changed seasonally?
+                </p>
+                <p>
+                    Engineers solve this in several ways:
+                </p>
+                <ul>
+                    <li><strong>Dual-cable approach:</strong> Install two fibres &mdash; one bonded to the
+                    structure (measures strain + temperature) and one in a loose tube (measures temperature
+                    only, as it's free to move). Subtract the temperature effect to isolate strain.</li>
+                    <li><strong>Combined Brillouin + Raman:</strong> Use Brillouin for strain+temperature and
+                    Raman for temperature only. The difference gives you pure strain.</li>
+                    <li><strong>Reference sections:</strong> Leave sections of the fibre in a known, strain-free
+                    environment to calibrate the temperature response.</li>
+                    <li><strong>Hybrid cables:</strong> Purpose-built sensing cables with both tight-buffered
+                    (strain-sensing) and loose-tube (temperature-only) fibres in a single jacket.</li>
+                </ul>
+                <p>
+                    Getting this right is critical for accurate geotechnical monitoring. It's one of the
+                    areas where specialist consulting makes the difference between useful data and misleading numbers.
+                </p>
+
+                <h2>Inside the Interrogator: How Measurements Are Made</h2>
+                <p>
+                    The interrogator unit is the "brain" of a DFOS system. It's a sophisticated opto-electronic
+                    instrument that:
+                </p>
+                <ul>
+                    <li><strong>Generates</strong> precisely controlled laser pulses (or swept-frequency signals for OFDR)</li>
+                    <li><strong>Detects</strong> the faint backscattered light using photodetectors</li>
+                    <li><strong>Processes</strong> the signals to extract strain, temperature, or vibration at every point</li>
+                    <li><strong>Outputs</strong> the data as a spatial profile (distance vs. measurand)</li>
+                </ul>
+                <p>
+                    Modern interrogators can complete a full measurement along several kilometres of fibre
+                    in seconds to minutes (for Brillouin/Raman) or thousands of times per second (for DAS).
+                    They typically output data via Ethernet or USB for further processing.
+                </p>
+                <p>
+                    <strong>Major manufacturers include:</strong> Luna Innovations (OFDR), Neubrex (Brillouin),
+                    Omnisens (Brillouin), Silixa (DAS/DTS), AP Sensing (DTS), Yokogawa (BOTDR), and
+                    FBGS (FBG interrogators). Costs range from &pound;30,000 for basic DTS units to
+                    &pound;150,000+ for high-end Brillouin analysers.
+                </p>
+
+                <h2>From Raw Signal to Engineering Data</h2>
+                <p>
+                    Raw DFOS data is not directly useful to an engineer. It requires processing through
+                    several steps:
+                </p>
+                <ul>
+                    <li><strong>Calibration:</strong> Converting frequency shifts or intensity ratios to
+                    physical units (microstrain, &deg;C) using calibration coefficients specific to
+                    the fibre type and installation.</li>
+                    <li><strong>Spatial registration:</strong> Mapping fibre distance to physical location
+                    on the structure. The fibre path is rarely straight &mdash; bends, coils, and slack
+                    must be accounted for.</li>
+                    <li><strong>Temperature compensation:</strong> Removing the temperature component from
+                    strain measurements (as discussed above).</li>
+                    <li><strong>Noise filtering:</strong> Applying moving averages, Savitzky-Golay filters,
+                    or wavelet denoising to improve signal quality without losing spatial detail.</li>
+                    <li><strong>Baseline subtraction:</strong> Comparing current measurements to a reference
+                    state to identify changes over time.</li>
+                    <li><strong>Engineering interpretation:</strong> Converting strain profiles to displacement,
+                    curvature, load, or other meaningful engineering parameters.</li>
+                </ul>
+                <p>
+                    This processing pipeline is where <strong>Python and MATLAB</strong> become essential tools.
+                    At GeoMonix, I build automated data processing workflows that take raw interrogator outputs
+                    and produce clean, interpretable engineering data &mdash; saving hours of manual processing
+                    and reducing the risk of errors.
+                </p>
+
+                <h2>The Fibre Itself: Not All Cables Are Equal</h2>
+                <p>
+                    While standard single-mode telecom fibre (SMF-28) can be used for sensing, the cable
+                    construction around the fibre is critical for geotechnical applications:
+                </p>
+                <ul>
+                    <li><strong>Tight-buffered cables:</strong> The fibre is bonded directly to the protective
+                    jacket. Strain in the structure transfers directly to the fibre. Essential for strain
+                    measurement.</li>
+                    <li><strong>Loose-tube cables:</strong> The fibre sits loosely inside a gel-filled tube.
+                    It can move freely, so it only measures temperature (not strain). Used for temperature
+                    compensation and DTS applications.</li>
+                    <li><strong>Armoured cables:</strong> Steel wire or Kevlar armour protects the fibre
+                    during installation in harsh environments (backfilling, concrete pouring, directional drilling).</li>
+                    <li><strong>Flat ribbon cables:</strong> Used for surface-bonded applications on structures
+                    like tunnel linings, bridge decks, or retaining walls.</li>
+                    <li><strong>Sensing-specific cables:</strong> Purpose-built cables from manufacturers like
+                    Solifos, Brugg, or Sensornet that combine multiple fibre types in engineered configurations
+                    for specific monitoring applications.</li>
+                </ul>
+                <p>
+                    Cable selection is one of the most important decisions in a DFOS monitoring project.
+                    The wrong cable can mean poor strain transfer, premature failure, or unusable data.
+                    This is an area where getting independent advice before procurement can save significant
+                    cost and frustration.
+                </p>
+
+                <h2>Summary: Why This Matters for Engineers</h2>
+                <p>
+                    Understanding the physics behind DFOS helps you:
+                </p>
+                <ul>
+                    <li><strong>Choose the right technology</strong> &mdash; Brillouin for long-range geotechnical,
+                    Rayleigh for high-resolution structural, Raman for temperature</li>
+                    <li><strong>Specify correctly</strong> &mdash; spatial resolution, range, accuracy, and
+                    measurement speed all depend on the scattering mechanism</li>
+                    <li><strong>Avoid common pitfalls</strong> &mdash; temperature-strain cross-sensitivity,
+                    wrong cable type, inadequate spatial registration</li>
+                    <li><strong>Interpret data critically</strong> &mdash; knowing the limitations helps you
+                    trust the data where it's reliable and question it where it might not be</li>
+                </ul>
+                <p>
+                    In the next article, we'll look at <strong>fibre optic cable types and selection</strong>
+                    in more detail &mdash; including installation methods for different geotechnical applications.
+                </p>
+
+                <h2>Need Help With DFOS for Your Project?</h2>
+                <p>
+                    Whether you're specifying a new monitoring system, reviewing a contractor's proposal,
+                    or trying to make sense of existing DFOS data, I can help. With hands-on research
+                    experience and a &pound;25,000 ICE-funded fibre optic monitoring project, I bring
+                    both theoretical understanding and practical expertise.
+                </p>
+                <p>
+                    <a href="../index.html#contact" class="btn btn-primary">Discuss Your Project</a>
+                </p>
+
+                <h3>Related Articles</h3>
+                <ul>
+                    <li><a href="fibre-optic-sensing-geotechnical-monitoring.html">Fibre Optic Sensing for Geotechnical Monitoring: A Practical Guide</a></li>
+                </ul>
+            </div>
+
+            <div class="blog-footer">
+                <div class="blog-author-card">
+                    <div class="blog-author-info">
+                        <h4>Dr Reza Movahedifar</h4>
+                        <p>PhD Civil Engineering | Geotechnical Consulting, Monitoring & Education</p>
+                        <p>Founder of GeoMonix, specialising in fibre optic sensing, FEA, and infrastructure monitoring.</p>
+                        <div class="blog-author-links">
+                            <a href="https://www.linkedin.com/in/reza-movahedifar-2726b1156/" target="_blank" rel="noopener">LinkedIn</a>
+                            <a href="https://www.youtube.com/@Asset-Modelling-Analysis-Group" target="_blank" rel="noopener">YouTube</a>
+                            <a href="../index.html#contact">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 GeoMonix. All rights reserved. | Dr Reza Movahedifar</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', () => {
+            document.getElementById('navToggle').classList.toggle('active');
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
