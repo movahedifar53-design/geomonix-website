@@ -1,105 +1,108 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450" fill="none">
   <defs>
-    <linearGradient id="bgG" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="bgG2" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#0f1520"/>
       <stop offset="100%" stop-color="#0a0e17"/>
     </linearGradient>
-    <linearGradient id="groundG" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2a1f14"/>
-      <stop offset="100%" stop-color="#1a1510"/>
-    </linearGradient>
-    <linearGradient id="roadG" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#3a3a3a"/>
-      <stop offset="100%" stop-color="#2a2a2a"/>
-    </linearGradient>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
   </defs>
 
   <!-- Background -->
-  <rect width="900" height="420" rx="16" fill="url(#bgG)"/>
-  <rect width="900" height="420" rx="16" fill="none" stroke="#1a2438" stroke-width="1"/>
+  <rect width="900" height="450" rx="16" fill="url(#bgG2)"/>
+  <rect width="900" height="450" rx="16" fill="none" stroke="#1a2438" stroke-width="1"/>
 
   <!-- Title -->
-  <text x="450" y="35" text-anchor="middle" fill="#e8ecf4" font-family="Inter, sans-serif" font-size="16" font-weight="700">Fibre Optic Monitoring for Geotechnical Infrastructure</text>
+  <text x="450" y="38" text-anchor="middle" fill="#e8ecf4" font-family="Inter, sans-serif" font-size="18" font-weight="700">Fibre Optic Monitoring for Geotechnical Infrastructure</text>
 
-  <!-- Sky area - just the background -->
+  <!-- Sky / Above ground -->
+  <rect x="20" y="55" width="860" height="170" rx="8" fill="#0d1219"/>
 
   <!-- Ground layers -->
-  <rect x="0" y="220" width="900" height="200" rx="0" fill="url(#groundG)"/>
+  <rect x="20" y="225" width="860" height="75" rx="0" fill="#2d2318" opacity="0.6"/>
+  <rect x="20" y="300" width="860" height="70" rx="0" fill="#231c12" opacity="0.5"/>
+  <rect x="20" y="370" width="860" height="40" rx="0 0 8 8" fill="#1a1510" opacity="0.4"/>
 
-  <!-- Soil layers -->
-  <rect x="0" y="220" width="900" height="60" fill="#2d2318" opacity="0.7"/>
-  <line x1="0" y1="280" x2="900" y2="280" stroke="#3d3020" stroke-width="1" stroke-dasharray="8 4"/>
-  <rect x="0" y="280" width="900" height="70" fill="#231c12" opacity="0.5"/>
-  <line x1="0" y1="350" x2="900" y2="350" stroke="#3d3020" stroke-width="1" stroke-dasharray="8 4"/>
+  <!-- Ground layer labels -->
+  <text x="850" y="268" text-anchor="end" fill="#6b5a42" font-family="Inter, sans-serif" font-size="10" font-weight="500">Fill / Granular</text>
+  <text x="850" y="340" text-anchor="end" fill="#6b5a42" font-family="Inter, sans-serif" font-size="10" font-weight="500">Clay</text>
+  <text x="850" y="393" text-anchor="end" fill="#6b5a42" font-family="Inter, sans-serif" font-size="10" font-weight="500">Sand / Gravel</text>
 
-  <!-- Layer labels -->
-  <text x="860" y="255" text-anchor="end" fill="#5a4a35" font-family="Inter, sans-serif" font-size="9">Fill / Granular</text>
-  <text x="860" y="310" text-anchor="end" fill="#5a4a35" font-family="Inter, sans-serif" font-size="9">Clay</text>
-  <text x="860" y="380" text-anchor="end" fill="#5a4a35" font-family="Inter, sans-serif" font-size="9">Sand / Gravel</text>
+  <!-- Layer dividers -->
+  <line x1="20" y1="300" x2="880" y2="300" stroke="#4a3d2a" stroke-width="1" stroke-dasharray="8 4" opacity="0.5"/>
+  <line x1="20" y1="370" x2="880" y2="370" stroke="#4a3d2a" stroke-width="1" stroke-dasharray="8 4" opacity="0.5"/>
 
   <!-- Road surface -->
-  <rect x="50" y="200" width="800" height="22" rx="2" fill="url(#roadG)"/>
-  <line x1="200" y1="211" x2="250" y2="211" stroke="#666" stroke-width="2"/>
-  <line x1="350" y1="211" x2="400" y2="211" stroke="#666" stroke-width="2"/>
-  <line x1="500" y1="211" x2="550" y2="211" stroke="#666" stroke-width="2"/>
-  <line x1="650" y1="211" x2="700" y2="211" stroke="#666" stroke-width="2"/>
-  <text x="450" y="195" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="10">Road Surface</text>
+  <rect x="50" y="215" width="800" height="18" rx="3" fill="#3a3a3a"/>
+  <rect x="50" y="215" width="800" height="4" rx="2" fill="#4a4a4a"/>
+  <!-- Road markings -->
+  <line x1="200" y1="225" x2="260" y2="225" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+  <line x1="370" y1="225" x2="430" y2="225" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+  <line x1="540" y1="225" x2="600" y2="225" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+  <line x1="710" y1="225" x2="770" y2="225" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+  <text x="450" y="210" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="11" font-weight="500">Road Surface</text>
 
   <!-- Buried pipe -->
-  <ellipse cx="300" cy="305" rx="25" ry="25" fill="none" stroke="#5a6478" stroke-width="3"/>
-  <ellipse cx="300" cy="305" rx="20" ry="20" fill="#141c2b"/>
-  <text x="300" y="309" text-anchor="middle" fill="#5a6478" font-family="Inter, sans-serif" font-size="8">Pipe</text>
+  <circle cx="320" cy="320" r="28" fill="none" stroke="#6b7a8a" stroke-width="4"/>
+  <circle cx="320" cy="320" r="22" fill="#141c2b"/>
+  <text x="320" y="324" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="10" font-weight="500">Pipe</text>
 
-  <!-- Fibre optic cable along pipe - teal dashed line -->
-  <path d="M120,300 Q200,290 280,305 Q350,315 430,305 Q510,295 590,305 Q670,315 750,305 Q800,300 850,305" stroke="#0fb5ba" stroke-width="2.5" fill="none" stroke-dasharray="6 3"/>
-  <text x="590" y="330" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="9" font-weight="600">Fibre Optic Cable (DFOS)</text>
+  <!-- Fibre optic cable along pipe -->
+  <path d="M130,315 Q220,305 300,320 Q380,335 460,318 Q540,302 620,318 Q700,334 780,318 Q830,310 860,315" stroke="#0fb5ba" stroke-width="3" fill="none" filter="url(#glow2)"/>
+  <path d="M130,315 Q220,305 300,320 Q380,335 460,318 Q540,302 620,318 Q700,334 780,318 Q830,310 860,315" stroke="#0fb5ba" stroke-width="2" fill="none" stroke-dasharray="8 4"/>
 
-  <!-- FBG sensors on pipe -->
-  <circle cx="280" cy="300" r="4" fill="#0fb5ba"/>
-  <circle cx="430" cy="302" r="4" fill="#0fb5ba"/>
-  <circle cx="590" cy="303" r="4" fill="#0fb5ba"/>
-  <circle cx="750" cy="302" r="4" fill="#0fb5ba"/>
+  <!-- FBG sensor points -->
+  <circle cx="300" cy="318" r="5" fill="#0fb5ba" filter="url(#glow2)"/>
+  <circle cx="460" cy="316" r="5" fill="#0fb5ba" filter="url(#glow2)"/>
+  <circle cx="620" cy="317" r="5" fill="#0fb5ba" filter="url(#glow2)"/>
+  <circle cx="780" cy="316" r="5" fill="#0fb5ba" filter="url(#glow2)"/>
+
+  <!-- Fibre optic label -->
+  <rect x="490" y="345" width="200" height="22" rx="4" fill="#141c2b" opacity="0.9"/>
+  <text x="590" y="360" text-anchor="middle" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="10" font-weight="600">Fibre Optic Cable (DFOS)</text>
 
   <!-- Interrogator on surface -->
-  <rect x="60" y="140" width="90" height="55" rx="6" fill="#141c2b" stroke="#0fb5ba" stroke-width="1.5"/>
-  <text x="105" y="163" text-anchor="middle" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="9" font-weight="600">Interrogator</text>
-  <text x="105" y="178" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="8">BOTDR/DTS</text>
-  <line x1="105" y1="195" x2="120" y2="300" stroke="#0fb5ba" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <rect x="55" y="130" width="120" height="65" rx="8" fill="#141c2b" stroke="#0fb5ba" stroke-width="1.5"/>
+  <text x="115" y="158" text-anchor="middle" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="12" font-weight="700">Interrogator</text>
+  <text x="115" y="178" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="10">BOTDR / DTS</text>
+
+  <!-- Cable from interrogator down to fibre -->
+  <line x1="115" y1="195" x2="130" y2="315" stroke="#0fb5ba" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
 
   <!-- Traditional sensors -->
   <!-- Piezometer -->
-  <rect x="480" y="240" width="8" height="50" rx="2" fill="#e8b84a" opacity="0.8"/>
-  <circle cx="484" cy="240" r="5" fill="#e8b84a" opacity="0.8"/>
-  <text x="505" y="270" fill="#e8b84a" font-family="Inter, sans-serif" font-size="8">Piezometer</text>
+  <rect x="495" y="245" width="8" height="60" rx="3" fill="#e8b84a"/>
+  <circle cx="499" cy="243" r="6" fill="#e8b84a"/>
+  <text x="520" y="280" fill="#e8b84a" font-family="Inter, sans-serif" font-size="10" font-weight="600">Piezometer</text>
 
   <!-- Inclinometer -->
-  <rect x="650" y="225" width="6" height="90" rx="2" fill="#e05a5a" opacity="0.8"/>
-  <text x="670" y="270" fill="#e05a5a" font-family="Inter, sans-serif" font-size="8">Inclinometer</text>
+  <rect x="680" y="238" width="7" height="95" rx="3" fill="#e05a5a"/>
+  <text x="702" y="290" fill="#e05a5a" font-family="Inter, sans-serif" font-size="10" font-weight="600">Inclinometer</text>
 
   <!-- Settlement plate -->
-  <rect x="175" y="218" width="30" height="4" rx="1" fill="#a78bfa" opacity="0.8"/>
-  <line x1="190" y1="222" x2="190" y2="260" stroke="#a78bfa" stroke-width="1.5" opacity="0.8"/>
-  <text x="190" y="275" text-anchor="middle" fill="#a78bfa" font-family="Inter, sans-serif" font-size="8">Settlement</text>
-  <text x="190" y="285" text-anchor="middle" fill="#a78bfa" font-family="Inter, sans-serif" font-size="8">Plate</text>
+  <rect x="185" y="230" width="35" height="5" rx="2" fill="#a78bfa"/>
+  <line x1="202" y1="235" x2="202" y2="270" stroke="#a78bfa" stroke-width="2"/>
+  <text x="202" y="286" text-anchor="middle" fill="#a78bfa" font-family="Inter, sans-serif" font-size="10" font-weight="600">Settlement</text>
 
-  <!-- Data flow to laptop -->
-  <rect x="730" y="100" width="120" height="70" rx="8" fill="#141c2b" stroke="#1a2438" stroke-width="1"/>
-  <text x="790" y="125" text-anchor="middle" fill="#e8ecf4" font-family="Inter, sans-serif" font-size="10" font-weight="600">Data Analytics</text>
-  <text x="790" y="142" text-anchor="middle" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="9">Python / MATLAB</text>
-  <text x="790" y="157" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="8">Processing &amp; Reporting</text>
+  <!-- Data Analytics box -->
+  <rect x="700" y="90" width="160" height="80" rx="10" fill="#141c2b" stroke="#1a2438" stroke-width="1.5"/>
+  <text x="780" y="118" text-anchor="middle" fill="#e8ecf4" font-family="Inter, sans-serif" font-size="12" font-weight="700">Data Analytics</text>
+  <text x="780" y="138" text-anchor="middle" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="11" font-weight="500">Python / MATLAB</text>
+  <text x="780" y="158" text-anchor="middle" fill="#8892a4" font-family="Inter, sans-serif" font-size="10">Processing &amp; Reporting</text>
 
-  <!-- WiFi/data link from interrogator to analytics -->
-  <path d="M150,160 Q440,80 730,135" stroke="#1a2438" stroke-width="1" fill="none" stroke-dasharray="6 4"/>
-  <text x="440" y="95" text-anchor="middle" fill="#5a6478" font-family="Inter, sans-serif" font-size="8">Data Transfer</text>
+  <!-- Data flow line -->
+  <line x1="175" y1="150" x2="700" y2="130" stroke="#1a2438" stroke-width="1.5" stroke-dasharray="8 5"/>
+  <text x="430" y="125" text-anchor="middle" fill="#5a6478" font-family="Inter, sans-serif" font-size="9" font-weight="500">Data Transfer</text>
 
   <!-- Legend -->
-  <rect x="30" y="60" width="200" height="70" rx="8" fill="#141c2b" stroke="#1a2438" stroke-width="1"/>
-  <text x="50" y="80" fill="#8892a4" font-family="Inter, sans-serif" font-size="9" font-weight="600">LEGEND</text>
-  <line x1="50" y1="95" x2="70" y2="95" stroke="#0fb5ba" stroke-width="2.5" stroke-dasharray="6 3"/>
-  <text x="80" y="99" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="9">Distributed Fibre Optic</text>
-  <circle cx="56" cy="112" r="4" fill="#e8b84a" opacity="0.8"/>
-  <text x="80" y="116" fill="#e8b84a" font-family="Inter, sans-serif" font-size="9">Traditional Point Sensors</text>
+  <rect x="280" y="68" width="300" height="30" rx="6" fill="#141c2b" stroke="#1a2438" stroke-width="1"/>
+  <line x1="300" y1="83" x2="325" y2="83" stroke="#0fb5ba" stroke-width="3" stroke-dasharray="6 3"/>
+  <text x="335" y="87" fill="#0fb5ba" font-family="Inter, sans-serif" font-size="9" font-weight="500">Distributed Fibre Optic</text>
+  <circle cx="445" cy="83" r="4" fill="#e8b84a"/>
+  <text x="458" y="87" fill="#e8b84a" font-family="Inter, sans-serif" font-size="9" font-weight="500">Traditional Sensors</text>
 
   <!-- Footer -->
-  <text x="450" y="410" text-anchor="middle" fill="#5a6478" font-family="Inter, sans-serif" font-size="10">geomonix.com | Dr Reza Movahedifar</text>
+  <text x="450" y="432" text-anchor="middle" fill="#5a6478" font-family="Inter, sans-serif" font-size="10">geomonix.com | Dr Reza Movahedifar</text>
 </svg>
