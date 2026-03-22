@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A practical guide to fibre optic sensing in geotechnical monitoring. Learn about DFOS technology, sensor types, applications, and when to use distributed fibre optic sensing vs traditional instrumentation.">
+    <meta name="keywords" content="fibre optic sensing, geotechnical monitoring, DFOS, distributed fibre optic sensing, structural health monitoring, Brillouin, Rayleigh, FBG, infrastructure monitoring">
+    <meta name="author" content="Dr Reza Movahedifar">
+    <meta property="og:title" content="Fibre Optic Sensing for Geotechnical Monitoring: A Practical Guide | GeoMonix">
+    <meta property="og:description" content="When should you use fibre optic sensing vs traditional sensors? A PhD engineer's practical guide to DFOS in geotechnical and infrastructure monitoring.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://geomonix.com/blog/fibre-optic-sensing-geotechnical-monitoring.html">
+    <title>Fibre Optic Sensing for Geotechnical Monitoring: A Practical Guide | GeoMonix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+    <!-- ═══════════════ NAVIGATION ═══════════════ -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-geo">Geo</span><span class="logo-monix">Monix</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../index.html#consulting" class="nav-link">Consulting</a></li>
+                <li><a href="../index.html#tutoring" class="nav-link">Tutoring</a></li>
+                <li><a href="../index.html#contact" class="nav-link nav-cta">Get in Touch</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ═══════════════ BLOG POST ═══════════════ -->
+    <article class="blog-post">
+        <div class="container">
+            <div class="blog-header">
+                <div class="blog-meta">
+                    <span class="blog-tag">Monitoring</span>
+                    <span class="blog-tag">Fibre Optics</span>
+                    <time datetime="2026-03-22">22 March 2026</time>
+                </div>
+                <h1>Fibre Optic Sensing for Geotechnical Monitoring: A Practical Guide</h1>
+                <p class="blog-author">By <strong>Dr Reza Movahedifar</strong> &mdash; PhD Civil Engineering, University of Birmingham</p>
+            </div>
+
+            <div class="blog-content">
+                <p class="blog-lead">
+                    Fibre optic sensing is transforming how we monitor infrastructure. But when should you
+                    use it instead of traditional instrumentation? This guide breaks down the technology,
+                    applications, and practical considerations for engineers and asset managers.
+                </p>
+
+                <h2>What Is Distributed Fibre Optic Sensing (DFOS)?</h2>
+                <p>
+                    Unlike conventional point sensors (such as vibrating wire piezometers or strain gauges)
+                    that measure at discrete locations, distributed fibre optic sensing turns the entire
+                    length of an optical fibre into a continuous sensor. A single fibre cable can provide
+                    thousands of measurement points over distances of several kilometres.
+                </p>
+                <p>
+                    The fibre itself is the sensor &mdash; when light travels through an optical fibre, it
+                    interacts with the glass material. Changes in temperature, strain, or vibration along
+                    the fibre alter the backscattered light signal, which can be analysed to determine
+                    precisely where and how much change has occurred.
+                </p>
+
+                <h2>Three Types of Scattering</h2>
+                <p>DFOS systems exploit three types of light scattering, each suited to different measurements:</p>
+
+                <div class="blog-table-wrapper">
+                    <table class="blog-table">
+                        <thead>
+                            <tr>
+                                <th>Technology</th>
+                                <th>Scattering Type</th>
+                                <th>Measures</th>
+                                <th>Spatial Resolution</th>
+                                <th>Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>BOTDR/BOTDA</strong></td>
+                                <td>Brillouin</td>
+                                <td>Strain & Temperature</td>
+                                <td>0.5 &ndash; 1.0 m</td>
+                                <td>Long-distance monitoring (pipelines, tunnels, embankments)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>OFDR</strong></td>
+                                <td>Rayleigh</td>
+                                <td>Strain & Temperature</td>
+                                <td>1 &ndash; 10 mm</td>
+                                <td>High-resolution structural monitoring</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DTS</strong></td>
+                                <td>Raman</td>
+                                <td>Temperature only</td>
+                                <td>0.5 &ndash; 2.0 m</td>
+                                <td>Leak detection, thermal profiling</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DAS</strong></td>
+                                <td>Rayleigh (coherent)</td>
+                                <td>Vibration / Acoustic</td>
+                                <td>1 &ndash; 10 m</td>
+                                <td>Seismic monitoring, intrusion detection</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Fibre Bragg Gratings (FBG): The Point Sensor Alternative</h2>
+                <p>
+                    Not all fibre optic sensors are distributed. Fibre Bragg Gratings (FBGs) are point
+                    sensors inscribed into the fibre at specific locations. Each FBG reflects a particular
+                    wavelength of light, which shifts when strain or temperature changes. Multiple FBGs
+                    can be multiplexed on a single fibre, typically up to 20&ndash;50 sensors per channel.
+                </p>
+                <p>
+                    FBGs are ideal when you need high-accuracy measurements at known critical locations,
+                    such as the crown of a tunnel, a structural joint, or a specific section of a pile.
+                </p>
+
+                <h2>Geotechnical Applications</h2>
+                <p>Fibre optic sensing is particularly valuable in these geotechnical scenarios:</p>
+
+                <h3>1. Tunnel and Excavation Monitoring</h3>
+                <p>
+                    Distributed strain sensing along tunnel linings provides continuous deformation profiles.
+                    Unlike discrete convergence pins, DFOS captures localised strain concentrations that
+                    might be missed by point measurements &mdash; critical for identifying potential failure zones.
+                </p>
+
+                <h3>2. Pipeline and Buried Infrastructure</h3>
+                <p>
+                    Monitoring buried pipelines for ground movement, third-party interference, and leak
+                    detection. DTS (distributed temperature sensing) can detect leaks by identifying
+                    temperature anomalies along water or gas pipelines. My own research at the University of
+                    Birmingham has focused specifically on the interaction between buried pipes, roads,
+                    and the surrounding ground.
+                </p>
+
+                <h3>3. Embankment and Slope Stability</h3>
+                <p>
+                    Fibre optic cables installed within or along embankments provide early warning of
+                    movement through distributed strain measurement. This is particularly effective for
+                    long linear assets like highway embankments and railway cuttings.
+                </p>
+
+                <h3>4. Pile Monitoring</h3>
+                <p>
+                    Instrumenting piles with fibre optics enables continuous load-transfer profiles during
+                    load testing, providing far richer data than traditional strain gauges at discrete levels.
+                </p>
+
+                <h3>5. Centrifuge and Laboratory Testing</h3>
+                <p>
+                    Fibre optic sensors are increasingly used in geotechnical centrifuge modelling, where
+                    their small size and immunity to electromagnetic interference make them ideal for
+                    measuring strain and temperature in scaled physical models. I was awarded a &pound;25,000
+                    ICE Research &amp; Development Enabling Fund specifically for developing fibre optic
+                    monitoring in centrifuge geotechnical applications.
+                </p>
+
+                <h2>When to Use Fibre Optics vs Traditional Sensors</h2>
+
+                <div class="blog-table-wrapper">
+                    <table class="blog-table">
+                        <thead>
+                            <tr>
+                                <th>Scenario</th>
+                                <th>Fibre Optics</th>
+                                <th>Traditional</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Long linear assets (km scale)</td>
+                                <td>Excellent &mdash; one cable covers everything</td>
+                                <td>Impractical &mdash; too many point sensors needed</td>
+                            </tr>
+                            <tr>
+                                <td>Harsh environments (EMI, water)</td>
+                                <td>Excellent &mdash; immune to electromagnetic interference</td>
+                                <td>May need special protection</td>
+                            </tr>
+                            <tr>
+                                <td>Simple single-point monitoring</td>
+                                <td>Overkill &mdash; expensive interrogator</td>
+                                <td>Better &mdash; simple and cost-effective</td>
+                            </tr>
+                            <tr>
+                                <td>Long-term (10+ years)</td>
+                                <td>Excellent &mdash; glass fibre is durable</td>
+                                <td>Good, but drift and corrosion can be issues</td>
+                            </tr>
+                            <tr>
+                                <td>Budget-constrained small project</td>
+                                <td>High upfront cost (interrogator)</td>
+                                <td>Better &mdash; lower capital cost</td>
+                            </tr>
+                            <tr>
+                                <td>Unknown failure location</td>
+                                <td>Excellent &mdash; full spatial coverage</td>
+                                <td>Risk of missing the critical zone</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Practical Considerations</h2>
+                <p>Before specifying fibre optic monitoring for your project, consider these factors:</p>
+                <ul>
+                    <li><strong>Cost structure:</strong> The interrogator unit is the major expense (&pound;30k&ndash;&pound;150k+). The fibre cable itself is cheap. So DFOS becomes cost-effective when you need many measurement points over long distances.</li>
+                    <li><strong>Installation:</strong> Fibre is fragile during installation. Cable routing, protection, and connection to the interrogator require careful planning.</li>
+                    <li><strong>Data volume:</strong> DFOS generates enormous datasets. You need robust data management and analysis pipelines &mdash; this is where Python/MATLAB scripting becomes essential.</li>
+                    <li><strong>Specialist expertise:</strong> Interpreting DFOS data requires understanding of both the sensing physics and the geotechnical context. This is where independent consulting adds real value.</li>
+                </ul>
+
+                <h2>How GeoMonix Can Help</h2>
+                <p>
+                    As an independent consultant with hands-on research experience in fibre optic sensing
+                    for geotechnical applications, I can help you:
+                </p>
+                <ul>
+                    <li>Determine whether DFOS is the right solution for your project</li>
+                    <li>Design the monitoring scheme (sensor selection, layout, specifications)</li>
+                    <li>Review existing monitoring proposals from contractors</li>
+                    <li>Analyse and interpret monitoring data</li>
+                    <li>Build automated data processing pipelines</li>
+                </ul>
+                <p>
+                    <a href="../index.html#contact" class="btn btn-primary">Discuss Your Project</a>
+                </p>
+            </div>
+
+            <div class="blog-footer">
+                <div class="blog-author-card">
+                    <div class="blog-author-info">
+                        <h4>Dr Reza Movahedifar</h4>
+                        <p>PhD Civil Engineering | Geotechnical Consulting, Monitoring & Education</p>
+                        <p>Founder of GeoMonix, specialising in fibre optic sensing, FEA, and infrastructure monitoring.</p>
+                        <div class="blog-author-links">
+                            <a href="https://www.linkedin.com/in/reza-movahedifar-2726b1156/" target="_blank" rel="noopener">LinkedIn</a>
+                            <a href="https://www.youtube.com/@Asset-Modelling-Analysis-Group" target="_blank" rel="noopener">YouTube</a>
+                            <a href="../index.html#contact">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-geo">Geo</span><span class="logo-monix">Monix</span>
+                    <p>Engineering Consulting, Monitoring & Education</p>
+                </div>
+                <div class="footer-links">
+                    <a href="../index.html#consulting">Consulting</a>
+                    <a href="../index.html#tutoring">Tutoring</a>
+                    <a href="../index.html#publications">Research</a>
+                    <a href="../index.html#contact">Contact</a>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/in/reza-movahedifar-2726b1156/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="https://www.youtube.com/@Asset-Modelling-Analysis-Group" target="_blank" rel="noopener" aria-label="YouTube">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 GeoMonix. All rights reserved. | Dr Reza Movahedifar</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

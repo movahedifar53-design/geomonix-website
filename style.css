@@ -774,6 +774,30 @@ img {
     line-height: 1.7;
 }
 
+/* Blog Card Links */
+.blog-card-link {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.blog-card-link:hover h3 {
+    color: var(--accent);
+}
+
+.blog-read-more {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    transition: all 0.3s ease;
+}
+
+.blog-card-link:hover .blog-read-more {
+    transform: translateX(4px);
+}
+
 /* ═══════════════ PUBLICATIONS ═══════════════ */
 .publications-list {
     max-width: 800px;
