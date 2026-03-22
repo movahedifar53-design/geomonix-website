@@ -1172,12 +1172,26 @@ img {
         text-align: center;
     }
 
+    .nav-socials {
+        justify-content: center;
+        margin-top: 8px;
+        margin-left: 0;
+    }
+
     .hero-title {
         letter-spacing: -1px;
     }
 
     .hero-stats {
-        gap: 24px;
+        gap: 20px;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
     }
 
     .stat-divider {
@@ -1216,12 +1230,69 @@ img {
         text-align: center;
     }
 
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footer-socials {
+        justify-content: center;
+    }
+
     .section {
         padding: 72px 0;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    .credential {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+
+    .skill-tags {
+        justify-content: center;
+    }
+
+    .conference-tags {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-scroll-indicator {
+        display: none;
     }
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    .hero {
+        padding: calc(var(--nav-height) + 24px) 16px 40px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-badge {
+        font-size: 0.7rem;
+        padding: 6px 14px;
+    }
+
     .hero-actions {
         flex-direction: column;
         align-items: center;
@@ -1233,6 +1304,18 @@ img {
     }
 
     .contact-form {
-        padding: 24px;
+        padding: 20px;
+    }
+
+    .service-card {
+        padding: 24px 20px;
+    }
+
+    .tutoring-card {
+        padding: 24px 20px;
+    }
+
+    .calc-grid {
+        grid-template-columns: 1fr;
     }
 }
