@@ -96,7 +96,7 @@
                 <ul>
                     <li><strong>Reproducible:</strong> Run the same script on new data and get consistent results every time.</li>
                     <li><strong>Auditable:</strong> Anyone can read your code and verify exactly what was done to the data.</li>
-                    <li><strong>Scalable:</strong> Process 100 rows or 10 million rows with the same script &mdash; no performance cliff.</li>
+                    <li><strong>Scalable:</strong> Process 100 rows or millions of rows with the same script &mdash; far beyond what a spreadsheet can handle.</li>
                     <li><strong>Automatable:</strong> Schedule scripts to run daily, trigger them when new data arrives, or chain them into pipelines.</li>
                     <li><strong>Version-controlled:</strong> Track every change with Git, revert mistakes, collaborate with colleagues.</li>
                 </ul>
@@ -223,7 +223,7 @@ print(f"Detected {len(anomalies)} anomalous readings out of {len(df)}")</code></
                 <p>
                     Let me walk through a realistic workflow that I use regularly. Imagine you have a
                     geotechnical monitoring project with 20 settlement sensors logging data every 15 minutes
-                    for six months. That's roughly 1.7 million individual readings. In Excel, this would
+                    for six months. That's roughly 350,000 individual readings. In Excel, this would
                     be unwieldy. In Python, it's straightforward.
                 </p>
 
@@ -286,10 +286,10 @@ for sensor in df["sensor_id"].unique():
     rate_of_change = np.gradient(readings)
 
     # Flag if rate exceeds 3 standard deviations from the mean
-    threshold = np.mean(rate_of_change) + 3 * np.std(rate_of_change)
-    df.loc[mask, "alert"] = np.abs(rate_of_change) &gt; np.abs(threshold)
+    threshold = 3 * np.std(rate_of_change)
+    df.loc[mask, "alert"] = np.abs(rate_of_change - np.mean(rate_of_change)) &gt; threshold
 
-alerts = df[df["alert"] == True]
+alerts = df[df["alert"]]
 print(f"Generated {len(alerts)} alerts across {alerts['sensor_id'].nunique()} sensors")</code></pre>
 
                 <h3>Step 6: Export Results</h3>
