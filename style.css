@@ -31,6 +31,25 @@
     --nav-height: 72px;
 }
 
+/* ── Skip Link ── */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    z-index: 10000;
+    padding: 12px 24px;
+    background: var(--accent);
+    color: var(--bg-primary);
+    font-weight: 700;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 12px;
+}
+
 /* ── Reset ── */
 *, *::before, *::after {
     margin: 0;

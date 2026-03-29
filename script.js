@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
+            submitBtn.setAttribute('aria-busy', 'true');
 
             fetch(this.action, {
                 method: 'POST',
@@ -117,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     submitBtn.textContent = 'Message Sent!';
                     submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                    submitBtn.setAttribute('aria-busy', 'false');
                     setTimeout(() => {
                         submitBtn.textContent = originalText;
                         submitBtn.style.background = '';
@@ -126,10 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     submitBtn.textContent = 'Error - Try Again';
                     submitBtn.disabled = false;
+                    submitBtn.setAttribute('aria-busy', 'false');
                 }
             }).catch(() => {
                 submitBtn.textContent = 'Error - Try Again';
                 submitBtn.disabled = false;
+                submitBtn.setAttribute('aria-busy', 'false');
             });
         });
     }
