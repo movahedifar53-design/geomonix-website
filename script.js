@@ -53,6 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            navToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
     // ── Scroll animations (Intersection Observer) ──
     const animatedElements = document.querySelectorAll(
         '.service-card, .tutoring-card, .resource-card, .pub-item, ' +
