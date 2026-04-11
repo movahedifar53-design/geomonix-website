@@ -1,0 +1,22 @@
+name = "geomonix-intake"
+main = "src/index.js"
+compatibility_date = "2025-10-01"
+
+# Origins allowed to call this Worker. Add your local dev host for testing
+# and the production domain for the live site.
+[vars]
+ALLOWED_ORIGINS = "https://geomonix.com,https://www.geomonix.com,http://localhost:8000,http://127.0.0.1:8000"
+
+# The "from" address for emails sent to clients and for the draft email that
+# lands in Reza's inbox. Use "GeoMonix <onboarding@resend.dev>" until the
+# custom domain is DNS-verified in Resend, then switch to:
+#   FROM_EMAIL = "GeoMonix <quotes@geomonix.com>"
+FROM_EMAIL = "GeoMonix <onboarding@resend.dev>"
+
+# Reza's inbox — receives [QUOTE DRAFT] emails for review-category services.
+REZA_EMAIL = "Geomonix.info@gmail.com"
+
+# Secrets are NOT stored here. Set them once with:
+#   wrangler secret put ANTHROPIC_API_KEY
+#   wrangler secret put TURNSTILE_SECRET
+#   wrangler secret put RESEND_API_KEY

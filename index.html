@@ -12,6 +12,13 @@
     <meta property="og:description" content="Expert geotechnical consulting, infrastructure monitoring, and civil engineering education by Dr Reza Movahedifar.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://geomonix.com">
+    <meta property="og:image" content="https://geomonix.com/assets/og-banner.png">
+    <meta property="og:site_name" content="GeoMonix">
+    <meta property="og:locale" content="en_GB">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="GeoMonix - Engineering Consulting, Monitoring & Education">
+    <meta name="twitter:description" content="Expert geotechnical consulting, infrastructure monitoring, and civil engineering education by Dr Reza Movahedifar.">
+    <meta name="twitter:image" content="https://geomonix.com/assets/og-banner.png">
     <title>GeoMonix | Dr Reza Movahedifar | Engineering Consulting, Monitoring & Education</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +27,7 @@
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/chat-intake.css">
 
     <!-- Skip to main content -->
     <!-- Structured Data: Person + Organization -->
@@ -30,6 +38,8 @@
             {
                 "@type": "Organization",
                 "name": "GeoMonix",
+                "alternateName": ["Geo Monix", "Geomonix", "GeoMonix Engineering", "GeoMonix Consulting"],
+                "legalName": "GeoMonix",
                 "url": "https://geomonix.com",
                 "description": "Engineering consulting, monitoring, and education services specialising in fibre optic sensing, geotechnical monitoring, FEA, and civil engineering tutoring.",
                 "founder": {
@@ -84,8 +94,28 @@
             {
                 "@type": "WebSite",
                 "name": "GeoMonix",
+                "alternateName": ["Geo Monix", "Geomonix"],
                 "url": "https://geomonix.com",
-                "description": "Engineering Consulting, Monitoring & Education by Dr Reza Movahedifar"
+                "description": "Engineering Consulting, Monitoring & Education by Dr Reza Movahedifar",
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "GeoMonix"
+                }
+            },
+            {
+                "@type": "ProfessionalService",
+                "name": "GeoMonix",
+                "alternateName": ["Geo Monix", "Geomonix"],
+                "url": "https://geomonix.com",
+                "description": "Engineering consulting, monitoring, and education services specialising in fibre optic sensing, geotechnical monitoring, FEA, and civil engineering tutoring.",
+                "priceRange": "$$",
+                "areaServed": "GB",
+                "serviceType": ["Geotechnical Consulting", "Structural Health Monitoring", "Finite Element Analysis", "Engineering Tutoring", "Data Analytics"],
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Birmingham",
+                    "addressCountry": "GB"
+                }
             }
         ]
     }
@@ -410,12 +440,12 @@
                     <span class="blog-read-more">Open calculator &rarr;</span>
                 </a>
                 <div class="resource-card">
-                    <div class="resource-badge">Coming Q2 2026</div>
+                    <div class="resource-badge">Coming Soon</div>
                     <h3>FEA Templates</h3>
                     <p>ABAQUS input file templates for common geotechnical and structural modelling scenarios.</p>
                 </div>
                 <div class="resource-card">
-                    <div class="resource-badge">Coming Q2 2026</div>
+                    <div class="resource-badge">Coming Soon</div>
                     <h3>Data Analysis Scripts</h3>
                     <p>Python/MATLAB scripts for processing monitoring data, time-series analysis, and visualisation.</p>
                 </div>
@@ -641,5 +671,12 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // GeoMonix AI intake widget configuration.
+        // Replace these once the Worker is deployed and Turnstile is set up.
+        window.GM_INTAKE_ENDPOINT = "https://geomonix-intake.geomonix.workers.dev/api/intake";
+        window.GM_TURNSTILE_SITE_KEY = "0x4AAAAAAC8OScjTrF0v4L2W";
+    </script>
+    <script src="assets/chat-intake.js" defer></script>
 </body>
 </html>
