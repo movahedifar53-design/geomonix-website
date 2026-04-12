@@ -1135,6 +1135,150 @@ img {
     min-height: 120px;
 }
 
+/* ═══════════════ TUTORING PRICING ═══════════════ */
+.tutoring-pricing {
+    margin-top: 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.tutoring-price {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -1px;
+}
+
+.tutoring-price-unit {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.tutoring-price-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* ═══════════════ TESTIMONIALS ═══════════════ */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.testimonial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    border-color: rgba(15, 181, 186, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.testimonial-quote p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    font-style: italic;
+    text-align: justify;
+}
+
+.testimonial-author {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.testimonial-author-info strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.testimonial-author-info span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* ═══════════════ FAQ ═══════════════ */
+.faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.faq-item[open] {
+    border-color: rgba(15, 181, 186, 0.2);
+}
+
+.faq-question {
+    padding: 20px 24px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+.faq-question::after {
+    content: "+";
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-left: 16px;
+    transition: transform 0.3s ease;
+}
+
+.faq-item[open] .faq-question::after {
+    content: "\2212";
+    transform: rotate(180deg);
+}
+
+.faq-question:hover {
+    color: var(--accent);
+}
+
+.faq-answer {
+    padding: 0 24px 20px;
+}
+
+.faq-answer p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    text-align: justify;
+}
+
 /* ═══════════════ FOOTER ═══════════════ */
 .footer {
     padding: 56px 0 28px;
@@ -1242,6 +1386,10 @@ img {
         grid-column: span 1;
     }
 
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .about-grid {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -1262,6 +1410,15 @@ img {
 }
 
 @media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tutoring-pricing {
+        flex-direction: column;
+        gap: 8px;
+    }
+
     .nav-toggle {
         display: flex;
     }
