@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How to choose the right sensors for structural health monitoring: comparison of strain gauges, accelerometers, fibre optic sensors, vibrating wire instruments, and MEMS devices, with selection criteria and practical guidance.">
+    <meta name="keywords" content="SHM sensor selection, structural health monitoring sensors, vibrating wire vs fibre optic, strain gauge SHM, accelerometer structural monitoring, MEMS sensors infrastructure, distributed fibre optic sensing, FBG sensors, data acquisition SHM, sensor selection criteria">
+    <meta name="author" content="Dr Reza Movahedifar">
+    <meta property="og:title" content="How to Choose the Right Sensors for Structural Health Monitoring | GeoMonix">
+    <meta property="og:description" content="A practical comparison of SHM sensor types including strain gauges, accelerometers, fibre optic, vibrating wire, and MEMS, with selection criteria for real projects.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://geomonix.com/blog/shm-sensor-selection-guide.html">
+    <meta property="og:image" content="https://geomonix.com/assets/og-banner.png">
+    <meta property="og:site_name" content="GeoMonix">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="robots" content="index, follow">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to Choose the Right Sensors for Structural Health Monitoring">
+    <meta name="twitter:description" content="A practical comparison of SHM sensor types including strain gauges, accelerometers, fibre optic, vibrating wire, and MEMS, with selection criteria for real projects.">
+    <meta name="twitter:image" content="https://geomonix.com/assets/og-banner.png">
+    <title>How to Choose the Right Sensors for Structural Health Monitoring | GeoMonix</title>
+    <link rel="canonical" href="https://geomonix.com/blog/shm-sensor-selection-guide.html">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "How to Choose the Right Sensors for Structural Health Monitoring",
+        "description": "A practical comparison of SHM sensor types including strain gauges, accelerometers, fibre optic, vibrating wire, and MEMS, with selection criteria for real projects.",
+        "datePublished": "2026-04-12",
+        "dateModified": "2026-04-12",
+        "author": {
+            "@type": "Person",
+            "name": "Dr Reza Movahedifar",
+            "url": "https://geomonix.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "GeoMonix",
+            "alternateName": ["Geo Monix", "Geomonix"],
+            "url": "https://geomonix.com"
+        },
+        "mainEntityOfPage": "https://geomonix.com/blog/shm-sensor-selection-guide.html",
+        "image": "https://geomonix.com/assets/og-banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://geomonix.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://geomonix.com/#blog"},
+            {"@type": "ListItem", "position": 3, "name": "How to Choose the Right Sensors for Structural Health Monitoring"}
+        ]
+    }
+    </script>
+</head>
+<body>
+
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-geo">Geo</span><span class="logo-monix">Monix</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
+                <li><a href="../index.html#consulting" class="nav-link">Consulting</a></li>
+                <li><a href="../index.html#contact" class="nav-link nav-cta">Get in Touch</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <div class="container">
+            <div class="blog-header">
+                <div class="blog-meta">
+                    <span class="blog-tag">Monitoring</span>
+                    <span class="blog-tag">SHM</span>
+                    <span class="blog-tag">Sensors</span>
+                    <time datetime="2026-04-12">12 April 2026</time>
+                </div>
+                <h1>How to Choose the Right Sensors for Structural Health Monitoring</h1>
+                <p class="blog-author">By <strong>Dr Reza Movahedifar</strong> &mdash; PhD Civil Engineering, University of Birmingham</p>
+            </div>
+
+            <div class="blog-content">
+                <p class="blog-lead">
+                    The success of any structural health monitoring programme depends on selecting the
+                    right sensors for the job. Choose poorly, and you get unreliable data, premature
+                    sensor failure, or measurements that do not answer the engineering questions you
+                    need answered. This guide compares the main sensor technologies used in SHM, explains
+                    the selection criteria that matter in practice, and offers guidance for making
+                    informed choices on real projects.
+                </p>
+
+                <h2>Why Sensor Selection Matters</h2>
+                <p>
+                    Structural health monitoring is only as good as the data it produces. The sensor is
+                    the interface between the physical world and your data system, and every sensor
+                    technology comes with trade-offs in accuracy, durability, cost, installation
+                    complexity, and suitability for different environments. There is no universally
+                    "best" sensor &mdash; only the best sensor for a given application, environment,
+                    and budget.
+                </p>
+                <p>
+                    A monitoring system designed without careful sensor selection often ends up with
+                    gaps in coverage, sensors that fail within months of installation, data that is
+                    dominated by environmental noise rather than structural response, or a system that
+                    is so expensive to install and maintain that it is abandoned before it delivers
+                    useful information. Getting the sensor selection right at the design stage avoids
+                    all of these outcomes.
+                </p>
+
+                <h2>Sensor Types for Structural Health Monitoring</h2>
+                <p>
+                    The following sections describe the main sensor technologies used in SHM, with their
+                    operating principles, strengths, and limitations.
+                </p>
+
+                <h3>Electrical Resistance Strain Gauges</h3>
+                <p>
+                    The electrical resistance strain gauge is the oldest and most widely understood
+                    strain measurement technology. A thin metallic foil pattern is bonded to the
+                    structure's surface. As the structure deforms, the foil stretches or compresses,
+                    changing its electrical resistance. This resistance change is measured using a
+                    Wheatstone bridge circuit and converted to strain.
+                </p>
+                <p>
+                    <strong>Strengths:</strong> Very high accuracy and resolution (typically better than
+                    one microstrain). Extremely well-characterised technology with decades of published
+                    calibration data. Small physical size allows measurement at precise locations.
+                    Low individual sensor cost.
+                </p>
+                <p>
+                    <strong>Limitations:</strong> Susceptible to electromagnetic interference (EMI),
+                    which is a significant issue near power lines, railway systems, or industrial
+                    equipment. Each gauge requires individual wiring back to the data acquisition unit,
+                    making large-scale installations cable-intensive. Long-term stability is limited
+                    &mdash; foil gauges are prone to drift over months to years due to adhesive creep,
+                    moisture ingress, and fatigue of the foil. Temperature compensation is required
+                    (typically using a half-bridge or full-bridge configuration with dummy gauges).
+                    Surface preparation and bonding quality are critical to measurement reliability.
+                </p>
+                <p>
+                    <strong>Best for:</strong> Short-term laboratory testing, load tests, and situations
+                    where high-resolution point measurements are needed in benign environments. Less
+                    suitable for long-term field monitoring in harsh conditions.
+                </p>
+
+                <h3>Vibrating Wire Sensors</h3>
+                <p>
+                    Vibrating wire sensors have been the workhorse of geotechnical and structural
+                    monitoring for decades. A tensioned steel wire is clamped between two end blocks
+                    attached to the structure (or embedded in soil or concrete). As strain is applied,
+                    the tension in the wire changes, altering its natural frequency of vibration. An
+                    electromagnetic coil plucks the wire and measures the resonant frequency, from
+                    which strain is calculated.
+                </p>
+                <p>
+                    <strong>Strengths:</strong> Excellent long-term stability &mdash; the measurement is
+                    frequency-based rather than amplitude-based, making it inherently resistant to
+                    cable resistance changes, contact resistance, and many sources of electrical noise.
+                    Robust in harsh environments (underground, underwater, embedded in concrete).
+                    Proven track record over decades of field use. Available as strain gauges,
+                    piezometers, pressure cells, load cells, crackmetre gauges, and tiltmeters &mdash;
+                    a comprehensive family of instruments sharing the same measurement principle.
+                </p>
+                <p>
+                    <strong>Limitations:</strong> Each sensor is a discrete point measurement &mdash;
+                    you measure strain (or pressure, or displacement) at the sensor location only. For
+                    comprehensive coverage, you need many individual sensors, each with its own cable.
+                    Measurement speed is relatively slow (typically a few readings per second at best),
+                    making vibrating wire sensors unsuitable for dynamic measurements. The sensors are
+                    physically larger than foil strain gauges, limiting spatial resolution. They cannot
+                    easily be multiplexed on a single cable.
+                </p>
+                <p>
+                    <strong>Best for:</strong> Long-term monitoring of geotechnical structures
+                    (retaining walls, embankments, tunnels, dams), pore water pressure measurement,
+                    and any application where long-term reliability is paramount and dynamic response
+                    is not required.
+                </p>
+
+                <h3>Fibre Optic Sensors</h3>
+                <p>
+                    Fibre optic sensing is the most significant advancement in structural monitoring
+                    technology in recent decades. Two main categories are used in SHM:
+                </p>
+                <p>
+                    <strong>Fibre Bragg Grating (FBG) sensors</strong> use a periodic variation in the
+                    refractive index of the optical fibre core, inscribed over a short length (typically
+                    a few millimetres). When broadband light is transmitted through the fibre, the
+                    grating reflects a narrow wavelength determined by the grating period and the
+                    effective refractive index. Strain or temperature changes alter the grating period,
+                    shifting the reflected wavelength. Multiple FBGs can be inscribed along a single
+                    fibre at different wavelengths, allowing multiplexed measurement of strain at many
+                    discrete points using one fibre and one interrogator.
+                </p>
+                <p>
+                    <strong>Distributed fibre optic sensing (DFOS)</strong> measures strain or
+                    temperature continuously along the entire length of the fibre, with no discrete
+                    sensors needed &mdash; the fibre itself is the sensor. Technologies based on
+                    Brillouin scattering (BOTDR, BOTDA) and Rayleigh scattering (OFDR) provide
+                    spatial resolutions ranging from centimetres to metres over distances of kilometres.
+                    For a detailed explanation of the physics behind distributed sensing, see my article
+                    on <a href="how-distributed-fibre-optic-sensing-works.html">how distributed fibre
+                    optic sensing works</a>.
+                </p>
+                <p>
+                    <strong>Strengths:</strong> Complete immunity to electromagnetic interference.
+                    Multiplexing capability &mdash; dozens of FBG sensors or kilometres of distributed
+                    measurement on a single fibre. Lightweight and small diameter. No electrical power
+                    at the sensor location (intrinsically safe for explosive or flammable environments).
+                    Distributed sensing provides spatial coverage that is simply impossible with any
+                    point-sensor technology. Long-term stability is excellent as the measurement is
+                    wavelength-encoded.
+                </p>
+                <p>
+                    <strong>Limitations:</strong> Higher upfront cost for interrogation equipment
+                    compared to vibrating wire or resistance gauges. Fibre optic cables are fragile
+                    in construction environments and require careful handling and protection. Splice
+                    and connector losses must be managed. Installation requires specialist knowledge
+                    &mdash; bonding or embedding fibre in a way that ensures reliable strain transfer
+                    from the structure to the fibre is not trivial. Temperature-strain cross-sensitivity
+                    must be compensated (using a separate temperature-sensing fibre or a dual-parameter
+                    technique).
+                </p>
+                <p>
+                    <strong>Best for:</strong> Large-scale infrastructure monitoring (bridges, tunnels,
+                    pipelines, dams, embankments), situations requiring distributed measurement along
+                    a linear asset, environments with high EMI, and long-term monitoring where sensor
+                    reliability is critical. For a comprehensive guide to fibre optic sensing in
+                    geotechnical applications, see my article on
+                    <a href="fibre-optic-sensing-geotechnical-monitoring.html">fibre optic sensing for
+                    geotechnical monitoring</a>.
+                </p>
+
+                <h3>Accelerometers</h3>
+                <p>
+                    Accelerometers measure the dynamic acceleration of the structure, from which
+                    velocity and displacement can be derived through integration. They are essential
+                    for modal analysis, vibration monitoring, and seismic response measurement.
+                </p>
+                <p>
+                    Several types are used in SHM:
+                </p>
+                <ul>
+                    <li><strong>Piezoelectric accelerometers:</strong> High sensitivity and wide
+                    frequency range. Excellent for dynamic measurements but cannot measure static
+                    or very low-frequency accelerations (they are AC-coupled). Robust and widely
+                    available.</li>
+                    <li><strong>Piezoresistive (MEMS) accelerometers:</strong> Can measure static and
+                    dynamic acceleration (DC-coupled). Lower cost than piezoelectric sensors. Accuracy
+                    and noise floor are improving rapidly with advances in MEMS fabrication. Well
+                    suited to SHM applications where both static tilt and dynamic vibration are of
+                    interest.</li>
+                    <li><strong>Force-balance (servo) accelerometers:</strong> The highest accuracy for
+                    low-frequency and static measurements. Used in seismology and for high-precision
+                    structural monitoring. Higher cost and larger physical size than MEMS devices.</li>
+                </ul>
+                <p>
+                    <strong>Best for:</strong> Dynamic characterisation of structures (natural frequency
+                    identification, mode shape mapping, damping estimation), seismic monitoring, traffic
+                    and wind-induced vibration assessment, and operational modal analysis.
+                </p>
+
+                <h3>MEMS-Based Multi-Sensor Modules</h3>
+                <p>
+                    Micro-electro-mechanical systems (MEMS) technology has enabled the development of
+                    compact, low-cost sensor modules that combine accelerometers, gyroscopes,
+                    magnetometers, temperature sensors, and sometimes humidity sensors in a single
+                    package. These modules, often combined with wireless communication and battery
+                    power, are increasingly used in SHM for:
+                </p>
+                <ul>
+                    <li>Tilt and inclination monitoring of structures and slopes</li>
+                    <li>Vibration-based structural identification</li>
+                    <li>Environmental condition monitoring (temperature, humidity)</li>
+                    <li>Displacement estimation through sensor fusion algorithms</li>
+                </ul>
+                <p>
+                    <strong>Strengths:</strong> Low cost per node enables dense sensor networks.
+                    Wireless capability reduces cabling. Battery-powered operation simplifies
+                    installation. Rapid deployment &mdash; many wireless MEMS systems can be installed
+                    in hours rather than days.
+                </p>
+                <p>
+                    <strong>Limitations:</strong> Lower accuracy and higher noise floor than dedicated
+                    high-quality sensors. Battery life is finite (typically months to a few years,
+                    depending on sampling rate and transmission frequency). Wireless communication
+                    range is limited and can be unreliable in reinforced concrete structures or
+                    underground environments. Long-term drift in MEMS sensors can be a concern for
+                    applications requiring absolute measurement accuracy over years.
+                </p>
+                <p>
+                    <strong>Best for:</strong> Rapid deployment, dense monitoring networks where
+                    individual sensor accuracy is less critical than spatial coverage, temporary
+                    monitoring campaigns, and situations where cabling is impractical.
+                </p>
+
+                <h2>Selection Criteria: What Actually Matters</h2>
+                <p>
+                    When choosing sensors for an SHM system, the following criteria should guide the
+                    decision. The relative importance of each depends on the specific project.
+                </p>
+
+                <h3>Measurand and Measurement Type</h3>
+                <p>
+                    Start with the engineering question. What do you need to measure &mdash; strain,
+                    displacement, acceleration, tilt, temperature, pore water pressure? Is it a
+                    static quantity (slowly varying, such as settlement or long-term strain), a
+                    dynamic quantity (vibration, seismic response), or both? This immediately narrows
+                    the field. Vibrating wire sensors cannot capture dynamic response. Piezoelectric
+                    accelerometers cannot measure static tilt. Distributed fibre optic sensing gives
+                    you spatial coverage but typically at lower temporal resolution than point sensors.
+                </p>
+
+                <h3>Environment and Durability</h3>
+                <p>
+                    The operating environment is often the most critical factor in sensor selection:
+                </p>
+                <ul>
+                    <li><strong>Electromagnetic interference:</strong> Near railways, power systems,
+                    or heavy industrial equipment, electrical sensors (strain gauges, some MEMS)
+                    may produce noisy or unreliable data. Fibre optic and vibrating wire sensors
+                    are immune to EMI.</li>
+                    <li><strong>Moisture and submersion:</strong> Underground and underwater
+                    installations demand sensors with appropriate ingress protection ratings.
+                    Vibrating wire sensors are well proven in saturated environments. Fibre optic
+                    cables can be specified with waterproof coatings. Foil strain gauges are
+                    vulnerable to moisture without extensive protection.</li>
+                    <li><strong>Temperature extremes:</strong> All sensors have specified operating
+                    temperature ranges. In environments with large temperature swings (exposed
+                    bridges, desert conditions, arctic installations), ensure the sensor and its
+                    adhesive or mounting system can tolerate the full range without degradation.</li>
+                    <li><strong>Chemical exposure:</strong> Aggressive ground conditions (acidic
+                    soils, contaminated ground, marine environments) attack metallic components.
+                    Fibre optic sensors, being glass-based, are inherently resistant to most
+                    chemical environments.</li>
+                    <li><strong>Construction survivability:</strong> Sensors embedded in concrete or
+                    soil must survive the installation process &mdash; vibration from compaction,
+                    impact from aggregate, pressure from wet concrete, and pulling forces during
+                    cable routing. This is a practical concern that eliminates some sensor types
+                    from certain applications regardless of their measurement performance.</li>
+                </ul>
+
+                <h3>Spatial Coverage vs Point Measurement</h3>
+                <p>
+                    A fundamental distinction is between point sensors (which measure at a single
+                    location) and distributed sensors (which measure continuously along a line). If
+                    you know exactly where the critical sections are, point sensors (vibrating wire,
+                    FBG, strain gauges) placed at those locations may be sufficient. If the failure
+                    mechanism is uncertain, or the structure is long and the critical location could
+                    be anywhere (a pipeline, a tunnel lining, an embankment crest), distributed fibre
+                    optic sensing provides coverage that no practical number of point sensors can match.
+                </p>
+
+                <h3>Long-Term Stability and Maintenance</h3>
+                <p>
+                    For monitoring programmes that must operate for years or decades (dams, bridges,
+                    nuclear structures), long-term sensor stability is paramount. Vibrating wire and
+                    fibre optic sensors have demonstrated stability over decades of field service. Foil
+                    strain gauges are less suitable for very long-term applications due to drift. MEMS
+                    sensors are improving but have a shorter track record for decade-scale monitoring.
+                </p>
+                <p>
+                    Maintenance requirements also matter. Sensors that require periodic recalibration,
+                    battery replacement, or physical access for data retrieval add ongoing costs that
+                    can exceed the initial installation cost over the life of the monitoring programme.
+                </p>
+
+                <h3>Data Acquisition and Integration</h3>
+                <p>
+                    The sensor is only one part of the monitoring system. The data acquisition system,
+                    communication infrastructure, data storage, and analysis software must all be
+                    compatible. Consider:
+                </p>
+                <ul>
+                    <li><strong>Sampling rate:</strong> Dynamic monitoring (vibration, seismic) requires
+                    high sampling rates (hundreds to thousands of samples per second). Static monitoring
+                    (settlement, long-term strain) may need only readings every few minutes or hours.
+                    The data acquisition system must support the required rate for all connected
+                    sensors.</li>
+                    <li><strong>Channel count:</strong> How many sensors will the system ultimately
+                    include? Vibrating wire and strain gauge systems require one channel per sensor.
+                    FBG systems multiplex many sensors on a single channel. Distributed systems
+                    provide thousands of measurement points from a single channel.</li>
+                    <li><strong>Power supply:</strong> Is mains power available at the monitoring
+                    location? If not, the system must run on batteries or solar power, which
+                    constrains the sampling rate and the number of sensors.</li>
+                    <li><strong>Data transmission:</strong> Can data be retrieved locally, or does it
+                    need to be transmitted remotely (cellular, Wi-Fi, satellite)? Remote transmission
+                    adds cost and complexity but enables real-time alerting and continuous monitoring
+                    without site visits.</li>
+                </ul>
+
+                <h3>Cost Considerations</h3>
+                <p>
+                    The total cost of a monitoring system includes sensor procurement, installation
+                    labour, cabling and protection, data acquisition hardware, software licences,
+                    ongoing maintenance, and data analysis. It is a common mistake to optimise only
+                    on sensor unit cost while ignoring installation and lifecycle costs. For example,
+                    a distributed fibre optic system has a higher interrogator cost than a vibrating
+                    wire system, but for large structures the per-measurement-point cost is often lower
+                    because one fibre replaces hundreds of individual sensors and their associated cables.
+                </p>
+
+                <h2>Sensor Comparison Summary</h2>
+                <div class="blog-table-wrapper">
+                    <table class="blog-table">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>Strain Gauge</th>
+                                <th>Vibrating Wire</th>
+                                <th>Fibre Optic (FBG/DFOS)</th>
+                                <th>Accelerometer</th>
+                                <th>MEMS Module</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Long-term stability</td>
+                                <td>Fair</td>
+                                <td>Excellent</td>
+                                <td>Excellent</td>
+                                <td>Good</td>
+                                <td>Fair</td>
+                            </tr>
+                            <tr>
+                                <td>EMI immunity</td>
+                                <td>Poor</td>
+                                <td>Good</td>
+                                <td>Excellent</td>
+                                <td>Varies</td>
+                                <td>Fair</td>
+                            </tr>
+                            <tr>
+                                <td>Dynamic measurement</td>
+                                <td>Yes</td>
+                                <td>No</td>
+                                <td>Yes (FBG); limited (DFOS)</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Distributed/spatial coverage</td>
+                                <td>No</td>
+                                <td>No</td>
+                                <td>Yes (DFOS)</td>
+                                <td>No</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td>Multiplexing</td>
+                                <td>Limited</td>
+                                <td>Limited</td>
+                                <td>Excellent</td>
+                                <td>Moderate</td>
+                                <td>Good (wireless)</td>
+                            </tr>
+                            <tr>
+                                <td>Harsh environment suitability</td>
+                                <td>Poor</td>
+                                <td>Excellent</td>
+                                <td>Good to Excellent</td>
+                                <td>Good</td>
+                                <td>Fair</td>
+                            </tr>
+                            <tr>
+                                <td>Per-sensor cost</td>
+                                <td>Low</td>
+                                <td>Moderate</td>
+                                <td>Moderate (FBG); Low (DFOS fibre)</td>
+                                <td>Moderate to High</td>
+                                <td>Low</td>
+                            </tr>
+                            <tr>
+                                <td>Interrogator/DAQ cost</td>
+                                <td>Low</td>
+                                <td>Low to Moderate</td>
+                                <td>High</td>
+                                <td>Moderate</td>
+                                <td>Low</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Practical Recommendations</h2>
+                <p>
+                    Based on experience across research and field monitoring projects, here are some
+                    practical recommendations for sensor selection:
+                </p>
+                <ul>
+                    <li><strong>Start with the engineering question:</strong> Define what you need to
+                    measure, why, and to what accuracy before selecting any technology. The sensor
+                    should serve the monitoring objective, not the other way around.</li>
+                    <li><strong>Consider the full lifecycle:</strong> A sensor that is cheap to buy but
+                    expensive to install, maintain, and replace may not be the most economical choice
+                    over the monitoring programme's lifetime.</li>
+                    <li><strong>Plan for redundancy:</strong> Critical monitoring systems should include
+                    redundant sensors at key locations. No sensor technology is immune to individual
+                    sensor failure, and losing a critical measurement point can compromise the entire
+                    monitoring programme.</li>
+                    <li><strong>Combine technologies:</strong> The best monitoring systems often use
+                    multiple sensor types. For example, distributed fibre optic sensing for spatial
+                    coverage combined with vibrating wire sensors at critical sections for independent
+                    verification and long-term stability. Accelerometers for dynamic characterisation
+                    alongside strain sensors for static response.</li>
+                    <li><strong>Prototype and test:</strong> Before committing to a large-scale
+                    installation, test your chosen sensors and installation methods on a representative
+                    section. This reveals practical issues (cable routing, bonding quality, signal
+                    quality) that are difficult to anticipate at the design stage.</li>
+                    <li><strong>Engage specialists early:</strong> Sensor selection, installation
+                    design, and data acquisition system specification are specialist tasks. Involving
+                    monitoring specialists at the design stage &mdash; rather than after the structure
+                    is built &mdash; produces better outcomes and often reduces overall cost.</li>
+                </ul>
+
+                <h2>Need Help Designing a Monitoring System?</h2>
+                <p>
+                    Whether you are specifying sensors for a new infrastructure project, upgrading an
+                    existing monitoring system, or evaluating the feasibility of distributed fibre optic
+                    sensing for your application, I can help. My research and consulting work spans
+                    fibre optic sensing, geotechnical instrumentation, and data-driven structural
+                    assessment, giving me a practical understanding of what works in the field &mdash;
+                    not just in the specification sheet.
+                </p>
+                <p>
+                    <a href="../index.html#contact" class="btn btn-primary">Discuss Your Project</a>
+                </p>
+
+                <h3>Related Articles</h3>
+                <ul>
+                    <li><a href="structural-health-monitoring-infrastructure.html">Structural Health Monitoring for Infrastructure</a></li>
+                    <li><a href="fibre-optic-sensing-geotechnical-monitoring.html">Fibre Optic Sensing for Geotechnical Monitoring: A Practical Guide</a></li>
+                    <li><a href="how-distributed-fibre-optic-sensing-works.html">How Distributed Fibre Optic Sensing Works: The Physics Explained Simply</a></li>
+                </ul>
+            </div>
+
+            <div class="blog-footer">
+                <div class="blog-author-card">
+                    <div class="blog-author-info">
+                        <h4>Dr Reza Movahedifar</h4>
+                        <p>PhD Civil Engineering | Geotechnical Consulting, Monitoring & Education</p>
+                        <p>Founder of GeoMonix, specialising in fibre optic sensing, FEA, and infrastructure monitoring.</p>
+                        <div class="blog-author-links">
+                            <a href="https://www.linkedin.com/in/reza-movahedifar-2726b1156/" target="_blank" rel="noopener">LinkedIn</a>
+                            <a href="https://www.youtube.com/@Asset-Modelling-Analysis-Group" target="_blank" rel="noopener">YouTube</a>
+                            <a href="../index.html#contact">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 GeoMonix. All rights reserved. | Dr Reza Movahedifar</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', () => {
+            document.getElementById('navToggle').classList.toggle('active');
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

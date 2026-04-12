@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mohr's circle explained with a clear visual guide: step-by-step construction, sign conventions, principal stresses, maximum shear stress, and common mistakes engineering students make.">
+    <meta name="keywords" content="Mohr's circle explained, Mohr circle tutorial, stress transformation, principal stresses, maximum shear stress, Mohr circle construction, stress analysis, engineering mechanics, geotechnical stress analysis, plane stress transformation">
+    <meta name="author" content="Dr Reza Movahedifar">
+    <meta property="og:title" content="Mohr's Circle Explained: A Visual Guide for Engineering Students | GeoMonix">
+    <meta property="og:description" content="A clear, visual explanation of Mohr's circle: step-by-step construction, sign conventions, principal stresses, and common mistakes to avoid.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://geomonix.com/blog/mohrs-circle-explained.html">
+    <meta property="og:image" content="https://geomonix.com/assets/og-banner.png">
+    <meta property="og:site_name" content="GeoMonix">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="robots" content="index, follow">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mohr's Circle Explained: A Visual Guide for Engineering Students">
+    <meta name="twitter:description" content="A clear, visual explanation of Mohr's circle: step-by-step construction, principal stresses, and common mistakes to avoid.">
+    <meta name="twitter:image" content="https://geomonix.com/assets/og-banner.png">
+    <title>Mohr's Circle Explained: A Visual Guide for Engineering Students | GeoMonix</title>
+    <link rel="canonical" href="https://geomonix.com/blog/mohrs-circle-explained.html">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blog.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Mohr's Circle Explained: A Visual Guide for Engineering Students",
+        "description": "A clear, visual explanation of Mohr's circle covering step-by-step construction, sign conventions, principal stresses, maximum shear stress, and common mistakes.",
+        "datePublished": "2026-04-12",
+        "dateModified": "2026-04-12",
+        "author": {
+            "@type": "Person",
+            "name": "Dr Reza Movahedifar",
+            "url": "https://geomonix.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "GeoMonix",
+            "alternateName": ["Geo Monix", "Geomonix"],
+            "url": "https://geomonix.com"
+        },
+        "mainEntityOfPage": "https://geomonix.com/blog/mohrs-circle-explained.html",
+        "image": "https://geomonix.com/assets/og-banner.png"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://geomonix.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://geomonix.com/#blog"},
+            {"@type": "ListItem", "position": 3, "name": "Mohr's Circle Explained: A Visual Guide for Engineering Students"}
+        ]
+    }
+    </script>
+</head>
+<body>
+
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-geo">Geo</span><span class="logo-monix">Monix</span>
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
+                <li><a href="../index.html#consulting" class="nav-link">Consulting</a></li>
+                <li><a href="../index.html#contact" class="nav-link nav-cta">Get in Touch</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="blog-post">
+        <div class="container">
+            <div class="blog-header">
+                <div class="blog-meta">
+                    <span class="blog-tag">Education</span>
+                    <span class="blog-tag">Mechanics</span>
+                    <span class="blog-tag">Geotechnical</span>
+                    <time datetime="2026-04-12">12 April 2026</time>
+                </div>
+                <h1>Mohr's Circle Explained: A Visual Guide for Engineering Students</h1>
+                <p class="blog-author">By <strong>Dr Reza Movahedifar</strong> &mdash; PhD Civil Engineering, University of Birmingham</p>
+            </div>
+
+            <div class="blog-content">
+                <p class="blog-lead">
+                    Mohr's circle is one of the most elegant and practically useful tools in engineering
+                    mechanics, yet it confuses more students than almost any other topic in a first
+                    course on stress analysis. This guide explains what Mohr's circle represents, how
+                    to construct it step by step, and &mdash; critically &mdash; the sign convention
+                    pitfalls that cause most of the confusion.
+                </p>
+
+                <h2>What Does Mohr's Circle Represent?</h2>
+                <p>
+                    Consider a small element of material under a general state of plane stress. The
+                    element experiences normal stresses and shear stresses on its faces. Now imagine
+                    rotating that element to a different orientation. The normal and shear stresses on
+                    the rotated faces change &mdash; even though the physical state of stress at that
+                    point has not changed at all. The material is still under the same loading; you are
+                    simply looking at it from a different angle.
+                </p>
+                <p>
+                    Mohr's circle is a graphical representation of how the normal stress and shear stress
+                    on a plane through the point vary as the orientation of that plane changes. Every
+                    point on the circle corresponds to the stress state (normal stress, shear stress) on
+                    a plane at a particular angle. The entire circle represents all possible orientations
+                    of the plane through that point.
+                </p>
+                <p>
+                    This is not just a mathematical curiosity. It answers questions that are directly
+                    relevant to engineering design and failure analysis:
+                </p>
+                <ul>
+                    <li>What is the maximum normal stress at this point, and on which plane does it act?
+                    (These are the principal stresses and principal planes.)</li>
+                    <li>What is the maximum shear stress, and on which plane does it act?</li>
+                    <li>What are the stresses on a plane at a specific angle &mdash; for instance, a
+                    potential failure plane, a weld line, or a joint?</li>
+                </ul>
+                <p>
+                    In geotechnical engineering, Mohr's circle is particularly important because soil
+                    failure criteria &mdash; most notably the Mohr-Coulomb failure criterion &mdash;
+                    are defined in terms of the stress state on the failure plane. Understanding Mohr's
+                    circle is therefore essential for understanding how and why soils fail.
+                </p>
+
+                <h2>The Sign Convention: Where Most Confusion Begins</h2>
+                <p>
+                    Before constructing the circle, you must establish a sign convention. This is where
+                    most errors originate, because different textbooks use different conventions, and
+                    mixing them produces wrong answers.
+                </p>
+                <p>
+                    The convention used in this guide (and in most geotechnical engineering and mechanics
+                    of materials textbooks) is:
+                </p>
+                <ul>
+                    <li><strong>Normal stress:</strong> Tensile is positive, compressive is negative. In
+                    geotechnical engineering, where almost all stresses are compressive, some authors
+                    reverse this convention (compressive positive). Be aware of which convention your
+                    course or textbook uses.</li>
+                    <li><strong>Shear stress:</strong> A shear stress that would cause clockwise rotation
+                    of the element is plotted as positive (upward) on the Mohr's circle diagram. A shear
+                    stress causing anticlockwise rotation is plotted as negative (downward). This is the
+                    convention that ensures the angle of rotation on Mohr's circle corresponds correctly
+                    to the physical angle of the plane.</li>
+                </ul>
+                <p>
+                    The most important thing is consistency. Pick one convention and use it throughout
+                    the entire problem. Do not switch mid-calculation.
+                </p>
+
+                <h2>Step-by-Step Construction of Mohr's Circle</h2>
+                <p>
+                    Suppose you have a plane stress element with the following known stresses: normal
+                    stress &sigma;<sub>x</sub> on the vertical faces, normal stress &sigma;<sub>y</sub>
+                    on the horizontal faces, and shear stress &tau;<sub>xy</sub> on both pairs of faces
+                    (with appropriate signs according to the convention above).
+                </p>
+
+                <h3>Step 1: Set Up the Axes</h3>
+                <p>
+                    Draw a set of axes with normal stress (&sigma;) on the horizontal axis and shear
+                    stress (&tau;) on the vertical axis. Tensile (positive) normal stress is to the
+                    right; compressive (negative) is to the left. Positive shear stress (clockwise
+                    rotation on the element) is plotted upward.
+                </p>
+
+                <h3>Step 2: Plot the Two Known Stress Points</h3>
+                <p>
+                    Plot two points representing the stress states on the two perpendicular faces of the
+                    element:
+                </p>
+                <ul>
+                    <li><strong>Point A:</strong> Represents the stress on the face with outward normal
+                    in the x-direction. Its coordinates are (&sigma;<sub>x</sub>, &tau;<sub>xy</sub>),
+                    where &tau;<sub>xy</sub> is plotted with the sign convention for the x-face.</li>
+                    <li><strong>Point B:</strong> Represents the stress on the face with outward normal
+                    in the y-direction. Its coordinates are (&sigma;<sub>y</sub>, &minus;&tau;<sub>xy</sub>).
+                    Note the sign reversal on the shear stress &mdash; if the shear on the x-face causes
+                    clockwise rotation, the complementary shear on the y-face causes anticlockwise rotation,
+                    and vice versa.</li>
+                </ul>
+
+                <h3>Step 3: Find the Centre</h3>
+                <p>
+                    The centre of Mohr's circle lies on the &sigma;-axis at the average of the two normal
+                    stresses:
+                </p>
+                <p>
+                    &sigma;<sub>avg</sub> = (&sigma;<sub>x</sub> + &sigma;<sub>y</sub>) / 2
+                </p>
+                <p>
+                    This is also the midpoint of the line segment connecting points A and B. The centre
+                    has coordinates (&sigma;<sub>avg</sub>, 0).
+                </p>
+
+                <h3>Step 4: Determine the Radius</h3>
+                <p>
+                    The radius of Mohr's circle is the distance from the centre to either point A or
+                    point B. Using the Pythagorean theorem:
+                </p>
+                <p>
+                    R = &radic;[ ((&sigma;<sub>x</sub> &minus; &sigma;<sub>y</sub>) / 2)<sup>2</sup> + &tau;<sub>xy</sub><sup>2</sup> ]
+                </p>
+                <p>
+                    This radius has a direct physical meaning: it equals the maximum shear stress at the
+                    point.
+                </p>
+
+                <h3>Step 5: Draw the Circle</h3>
+                <p>
+                    Draw a circle with centre (&sigma;<sub>avg</sub>, 0) and radius R. This circle
+                    passes through both points A and B. Every point on this circle represents the stress
+                    state on a plane at some orientation through the point of interest.
+                </p>
+
+                <h3>Step 6: Read Off the Results</h3>
+                <p>
+                    The circle immediately reveals several important quantities:
+                </p>
+                <ul>
+                    <li><strong>Principal stresses:</strong> The two points where the circle intersects the
+                    &sigma;-axis (where &tau; = 0). The rightmost intersection is the major principal
+                    stress &sigma;<sub>1</sub> = &sigma;<sub>avg</sub> + R. The leftmost is the minor
+                    principal stress &sigma;<sub>2</sub> = &sigma;<sub>avg</sub> &minus; R.</li>
+                    <li><strong>Maximum shear stress:</strong> The topmost point of the circle, with
+                    &tau;<sub>max</sub> = R. The associated normal stress on this plane equals
+                    &sigma;<sub>avg</sub>.</li>
+                    <li><strong>Principal plane orientations:</strong> The angle from point A to the
+                    &sigma;<sub>1</sub> point, measured around the circle, is 2&theta;<sub>p</sub>,
+                    where &theta;<sub>p</sub> is the physical angle you would rotate the element to
+                    align with the principal planes. The factor of two is fundamental: angles on
+                    Mohr's circle are always twice the physical rotation angle.</li>
+                </ul>
+
+                <h2>The 2&theta; Relationship: Why Angles Are Doubled</h2>
+                <p>
+                    The fact that angles on Mohr's circle are twice the physical angles is the single
+                    most important concept to grasp, and also the one that causes the most mistakes. It
+                    arises directly from the stress transformation equations, which contain terms in
+                    2&theta; (cos 2&theta; and sin 2&theta;). As the physical plane rotates by an angle
+                    &theta;, the corresponding point moves around Mohr's circle by 2&theta;.
+                </p>
+                <p>
+                    This has practical consequences:
+                </p>
+                <ul>
+                    <li>The two perpendicular faces of the element (physically 90&deg; apart) are
+                    represented by points that are 180&deg; apart on the circle &mdash; they are
+                    diametrically opposite. This is why points A and B always form a diameter.</li>
+                    <li>The principal planes (physically at an angle &theta;<sub>p</sub> from the
+                    original orientation) are at 2&theta;<sub>p</sub> from point A on the circle.</li>
+                    <li>The maximum shear stress planes are at 45&deg; to the principal planes physically,
+                    which is 90&deg; on the circle &mdash; exactly at the top and bottom of the circle,
+                    which is 90&deg; from the &sigma;-axis intersections. This is consistent.</li>
+                </ul>
+
+                <h2>Worked Example: Conceptual Walkthrough</h2>
+                <p>
+                    To solidify the method, consider a general example. Suppose a soil element at some
+                    depth is under a vertical normal stress &sigma;<sub>y</sub> (compressive, hence
+                    negative in our tension-positive convention), a horizontal normal stress
+                    &sigma;<sub>x</sub> that is smaller in magnitude than &sigma;<sub>y</sub> (also
+                    compressive), and a shear stress &tau;<sub>xy</sub> on the faces.
+                </p>
+
+                <h3>Constructing the Circle</h3>
+                <p>
+                    Plot point A at (&sigma;<sub>x</sub>, &tau;<sub>xy</sub>) and point B at
+                    (&sigma;<sub>y</sub>, &minus;&tau;<sub>xy</sub>). Since both normal stresses are
+                    compressive (negative), both points lie to the left of the origin on the &sigma;-axis.
+                    The centre of the circle is at the average of the two normal stresses, also to the
+                    left of the origin.
+                </p>
+                <p>
+                    The radius extends from the centre to either point. The circle lies entirely in the
+                    compressive (left) half of the diagram if both normal stresses are compressive and
+                    the shear stress is not so large as to push the circle past the origin. This is the
+                    typical situation in geotechnical problems, where the stress state is predominantly
+                    compressive.
+                </p>
+
+                <h3>Reading the Principal Stresses</h3>
+                <p>
+                    The major principal stress &sigma;<sub>1</sub> (the least compressive, or closest
+                    to zero in our sign convention) is at the right intersection of the circle with the
+                    &sigma;-axis. The minor principal stress &sigma;<sub>2</sub> (the most compressive)
+                    is at the left intersection. In geotechnical convention with compressive positive,
+                    these labels would be reversed &mdash; the larger compressive stress would be
+                    &sigma;<sub>1</sub>. Again, be consistent with your convention.
+                </p>
+
+                <h3>Finding the Failure Plane</h3>
+                <p>
+                    If we apply the Mohr-Coulomb failure criterion, we draw a line on the same diagram
+                    with slope tan(&phi;') and intercept c' (the cohesion). Failure occurs when Mohr's
+                    circle touches this line. The point of tangency gives the stress state on the failure
+                    plane, and the angle from the principal stress point to the tangent point (measured
+                    around the circle) gives twice the angle of the failure plane from the principal
+                    direction. For a Mohr-Coulomb material, this angle works out to 45&deg; + &phi;'/2
+                    from the major principal plane &mdash; a result that every geotechnical engineer
+                    should know, and Mohr's circle makes it visually obvious.
+                </p>
+
+                <h2>Mohr's Circle in Three Dimensions</h2>
+                <p>
+                    In three-dimensional stress states, there are three principal stresses
+                    (&sigma;<sub>1</sub> &ge; &sigma;<sub>2</sub> &ge; &sigma;<sub>3</sub>, using the
+                    geotechnical convention of compressive positive, or equivalently
+                    &sigma;<sub>1</sub> &le; &sigma;<sub>2</sub> &le; &sigma;<sub>3</sub> in
+                    tension-positive convention). Three Mohr's circles can be drawn, one for each pair
+                    of principal stresses. The stress state on any plane through the point lies within
+                    the region bounded by the outermost circle and outside the two inner circles.
+                </p>
+                <p>
+                    The absolute maximum shear stress is the radius of the largest circle:
+                </p>
+                <p>
+                    &tau;<sub>max</sub> = (&sigma;<sub>1</sub> &minus; &sigma;<sub>3</sub>) / 2
+                </p>
+                <p>
+                    (in tension-positive convention, where &sigma;<sub>1</sub> is the most tensile and
+                    &sigma;<sub>3</sub> is the most compressive). This is important in three-dimensional
+                    failure analysis and in FEA post-processing, where you need to assess whether the
+                    stress state at each integration point is approaching failure.
+                </p>
+
+                <h2>Mohr's Circle and the Mohr-Coulomb Failure Criterion</h2>
+                <p>
+                    In geotechnical engineering, the connection between Mohr's circle and the
+                    Mohr-Coulomb failure criterion is fundamental. The failure criterion states that
+                    shear failure occurs on a plane when the shear stress on that plane reaches a
+                    critical combination of the cohesion and the normal stress:
+                </p>
+                <p>
+                    &tau;<sub>f</sub> = c' + &sigma;<sub>n</sub>' tan(&phi;')
+                </p>
+                <p>
+                    where &tau;<sub>f</sub> is the shear stress at failure, c' is the effective cohesion,
+                    &sigma;<sub>n</sub>' is the effective normal stress on the failure plane, and &phi;'
+                    is the effective friction angle.
+                </p>
+                <p>
+                    On the Mohr's circle diagram, this failure criterion plots as a straight line (the
+                    failure envelope). As the stress state changes (for example, as the soil is loaded),
+                    Mohr's circle grows. Failure occurs at the instant when the circle becomes tangent
+                    to the failure envelope. The point of tangency identifies the stress state on the
+                    failure plane, and the geometry of the tangent determines the failure plane
+                    orientation.
+                </p>
+                <p>
+                    This graphical interpretation makes the Mohr-Coulomb criterion intuitive in a way
+                    that the algebraic formulation alone does not. You can immediately see how increasing
+                    confining pressure (moving the circle to the right, further into compression)
+                    increases the shear stress required for failure &mdash; this is the physical origin
+                    of the friction angle concept. You can see how cohesion raises the failure envelope,
+                    allowing the soil to sustain shear stress even at zero normal stress. And you can
+                    see how changing the stress path (the trajectory of the stress point as loading
+                    progresses) determines when and how failure is reached.
+                </p>
+
+                <h2>Common Mistakes to Avoid</h2>
+                <p>
+                    Having taught stress analysis and seen hundreds of student attempts at Mohr's circle
+                    problems, the following mistakes appear repeatedly:
+                </p>
+
+                <h3>1. Inconsistent Sign Convention</h3>
+                <p>
+                    This is the most common error. Students mix the geotechnical convention (compressive
+                    positive) with the mechanics of materials convention (tensile positive), or they
+                    forget to reverse the sign of the shear stress when plotting the complementary face.
+                    The result is a circle that is in the wrong location, with incorrect principal
+                    stresses and incorrect plane orientations.
+                </p>
+                <p>
+                    <strong>Prevention:</strong> Write down your sign convention explicitly at the start
+                    of every problem. Check that the two points you plot are diametrically opposite on
+                    the circle (they must be, because perpendicular faces are 180&deg; apart on Mohr's
+                    circle).
+                </p>
+
+                <h3>2. Confusing Physical Angles with Mohr's Circle Angles</h3>
+                <p>
+                    Forgetting the factor of two is extremely common. If you measure a 60&deg; angle on
+                    Mohr's circle, the physical rotation is 30&deg;. If a problem asks for the physical
+                    angle to the principal plane, and you read 2&theta;<sub>p</sub> from the circle,
+                    you must divide by two to get the actual rotation.
+                </p>
+
+                <h3>3. Wrong Direction of Rotation</h3>
+                <p>
+                    When finding the stress on a plane at a specific angle, the direction of rotation on
+                    Mohr's circle must correspond to the direction of rotation in physical space (with
+                    the factor of two). With the convention used in this guide, a counterclockwise
+                    rotation of the physical element corresponds to a counterclockwise movement around
+                    Mohr's circle (by twice the angle). Reversing this gives stresses on the wrong plane.
+                </p>
+
+                <h3>4. Forgetting That the Maximum Shear Plane Is Not the Failure Plane</h3>
+                <p>
+                    In a Mohr-Coulomb material, the failure plane is not the plane of maximum shear
+                    stress. The failure plane is the plane where the combination of shear and normal
+                    stress first satisfies the failure criterion, which occurs at the tangent point
+                    between Mohr's circle and the failure envelope. This plane is at
+                    45&deg; + &phi;'/2 from the major principal plane, not at 45&deg; (which is where
+                    the maximum shear stress acts). Students who assume that failure occurs on the
+                    maximum shear stress plane get the wrong failure angle.
+                </p>
+
+                <h3>5. Applying Plane Stress Results to Plane Strain Problems</h3>
+                <p>
+                    In plane stress (thin plates), &sigma;<sub>3</sub> = 0. In plane strain (long
+                    structures like retaining walls, tunnels, and embankments &mdash; the typical
+                    geotechnical case), &sigma;<sub>3</sub> is not zero; it is determined by the
+                    Poisson effect. Using plane stress Mohr's circle analysis for a plane strain problem
+                    gives incorrect results for the out-of-plane stress and potentially for the maximum
+                    shear stress if the intermediate principal stress is actually the out-of-plane stress.
+                </p>
+
+                <h2>Why This Matters Beyond the Exam</h2>
+                <p>
+                    Mohr's circle is not merely an examination topic. It appears throughout professional
+                    engineering practice:
+                </p>
+                <ul>
+                    <li><strong>Interpreting triaxial test results:</strong> The standard way to plot
+                    results from triaxial compression tests in geotechnical engineering is as Mohr's
+                    circles at failure, with the Mohr-Coulomb envelope drawn tangent to the circles.
+                    The intercept and slope of the envelope give c' and &phi;' &mdash; the fundamental
+                    strength parameters for design.</li>
+                    <li><strong>FEA post-processing:</strong> When reviewing stress results from a
+                    <a href="finite-element-analysis-geotechnical-engineering.html">finite element analysis</a>,
+                    you need to understand what principal stresses, von Mises stress, and maximum shear
+                    stress represent. These are all derived from the stress tensor using exactly the same
+                    transformation that Mohr's circle visualises.</li>
+                    <li><strong>Failure assessment:</strong> Whether you are checking a steel connection
+                    against yield (von Mises criterion), a concrete element against cracking (principal
+                    tensile stress), or a soil element against shear failure (Mohr-Coulomb), you are
+                    applying a failure criterion in principal stress space &mdash; the space that Mohr's
+                    circle maps out.</li>
+                    <li><strong>Strain analysis:</strong> Mohr's circle applies to strains as well as
+                    stresses. The construction is identical, with normal strain replacing normal stress
+                    and half the shear strain (&gamma;/2) replacing shear stress. This is useful for
+                    interpreting rosette strain gauge measurements and for understanding strain
+                    transformations in monitoring data.</li>
+                </ul>
+
+                <h2>Summary</h2>
+                <p>
+                    Mohr's circle is a graphical method for visualising how normal and shear stresses
+                    vary with plane orientation at a point. It reveals the principal stresses, maximum
+                    shear stress, and the orientations of these critical planes. The key concepts to
+                    remember are: angles on the circle are twice the physical angles; the centre of the
+                    circle is at the average normal stress; the radius equals the maximum shear stress;
+                    and the sign convention must be applied consistently throughout the problem.
+                </p>
+                <p>
+                    In geotechnical engineering, Mohr's circle connects directly to the Mohr-Coulomb
+                    failure criterion, making it essential for understanding soil strength, interpreting
+                    triaxial test data, and assessing stress states in numerical models. Master it once,
+                    and it will serve you throughout your engineering career.
+                </p>
+
+                <h2>Want to Learn More?</h2>
+                <p>
+                    If you are a student or early-career engineer looking for tutoring in geotechnical
+                    engineering, soil mechanics, or stress analysis, I offer one-to-one sessions
+                    covering these topics and more. For practising engineers interested in how these
+                    concepts apply in numerical modelling, see my articles on
+                    <a href="finite-element-analysis-geotechnical-engineering.html">finite element
+                    analysis in geotechnical engineering</a> and
+                    <a href="abaqus-soil-structure-interaction-guide.html">ABAQUS soil-structure
+                    interaction modelling</a>.
+                </p>
+                <p>
+                    <a href="../index.html#contact" class="btn btn-primary">Get in Touch</a>
+                </p>
+
+                <h3>Related Articles</h3>
+                <ul>
+                    <li><a href="finite-element-analysis-geotechnical-engineering.html">Finite Element Analysis in Geotechnical Engineering: When and Why You Need It</a></li>
+                    <li><a href="abaqus-soil-structure-interaction-guide.html">ABAQUS Soil-Structure Interaction Modelling: A Practical Guide</a></li>
+                    <li><a href="structural-health-monitoring-infrastructure.html">Structural Health Monitoring for Infrastructure</a></li>
+                </ul>
+            </div>
+
+            <div class="blog-footer">
+                <div class="blog-author-card">
+                    <div class="blog-author-info">
+                        <h4>Dr Reza Movahedifar</h4>
+                        <p>PhD Civil Engineering | Geotechnical Consulting, Monitoring & Education</p>
+                        <p>Founder of GeoMonix, specialising in fibre optic sensing, FEA, and infrastructure monitoring.</p>
+                        <div class="blog-author-links">
+                            <a href="https://www.linkedin.com/in/reza-movahedifar-2726b1156/" target="_blank" rel="noopener">LinkedIn</a>
+                            <a href="https://www.youtube.com/@Asset-Modelling-Analysis-Group" target="_blank" rel="noopener">YouTube</a>
+                            <a href="../index.html#contact">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 GeoMonix. All rights reserved. | Dr Reza Movahedifar</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('navToggle').addEventListener('click', () => {
+            document.getElementById('navToggle').classList.toggle('active');
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
