@@ -14,7 +14,11 @@ ALLOWED_ORIGINS = "https://geomonix.com,https://www.geomonix.com,http://localhos
 FROM_EMAIL = "GeoMonix <onboarding@resend.dev>"
 
 # Reza's inbox — receives [QUOTE DRAFT] emails for review-category services.
-REZA_EMAIL = "Geomonix.info@gmail.com"
+# TEMPORARY: set to Resend signup email during sandbox testing. Resend's
+# sandbox sender can only deliver to the account owner's email address until
+# the custom domain is DNS-verified. Switch to Geomonix.info@gmail.com after
+# verifying geomonix.com in Resend.
+REZA_EMAIL = "movahedifar53@gmail.com"
 
 # Secrets are NOT stored here. Set them once with:
 #   wrangler secret put ANTHROPIC_API_KEY

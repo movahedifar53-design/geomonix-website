@@ -103,16 +103,45 @@ async function callClaude({ model, systemPrompt, messages, maxTokens, env }) {
     .join("");
 }
 
+// Robust JSON extractor. Walks the text character-by-character, tracks brace
+// depth (respecting quoted strings so a `}` inside a string doesn't confuse
+// the counter), and returns the first balanced JSON object. Tolerates leading
+// prose, trailing garbage, extra closing braces, and code fences — all of
+// which we've seen Claude Haiku emit occasionally on the intake endpoint.
 function parseJsonLoose(text) {
   let t = text.trim();
   if (t.startsWith("```")) {
     t = t.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
   }
-  const first = t.indexOf("{");
-  const last = t.lastIndexOf("}");
-  if (first > 0 || last < t.length - 1) {
-    if (first !== -1 && last !== -1) t = t.slice(first, last + 1);
+
+  let depth = 0;
+  let start = -1;
+  let inString = false;
+  let escape = false;
+
+  for (let i = 0; i < t.length; i++) {
+    const c = t[i];
+    if (escape) { escape = false; continue; }
+    if (inString) {
+      if (c === "\\") { escape = true; continue; }
+      if (c === '"') { inString = false; }
+      continue;
+    }
+    if (c === '"') { inString = true; continue; }
+    if (c === "{") {
+      if (depth === 0) start = i;
+      depth++;
+    } else if (c === "}") {
+      if (depth > 0) {
+        depth--;
+        if (depth === 0 && start !== -1) {
+          return JSON.parse(t.slice(start, i + 1));
+        }
+      }
+    }
   }
+
+  // Fallback: no balanced object found, try parsing the whole thing directly
   return JSON.parse(t);
 }
 
@@ -264,32 +293,66 @@ async function handleQuote(request, env) {
 
   const clientMail = buildClientHoldingEmail({ client, serviceLabel: rates.label, brief });
 
+  // Sandbox mode: if FROM_EMAIL still points at Resend's sandbox sender,
+  // Resend only allows delivery to the account owner's email address. Route
+  // BOTH the Reza draft and the client holding email to REZA_EMAIL so the
+  // flow can be tested end-to-end without domain verification. The holding
+  // email body gets a visible prefix noting the real recipient. This branch
+  // disappears automatically once FROM_EMAIL is switched to the verified
+  // geomonix.com sender.
+  const inSandboxMode = (env.FROM_EMAIL || "").includes("resend.dev");
+  const clientDestination = inSandboxMode ? env.REZA_EMAIL : client.email;
+
+  let clientMailText = clientMail.text;
+  let clientMailSubject = clientMail.subject;
+  if (inSandboxMode) {
+    clientMailText =
+      `[SANDBOX MODE] This email would have been sent to: ${client.email}\n` +
+      `Redirected to ${env.REZA_EMAIL} because Resend domain is not yet verified.\n\n` +
+      `══════════════════════════════════════════════════════════\n\n` +
+      clientMail.text;
+    clientMailSubject = `[SANDBOX] ${clientMail.subject}`;
+    console.log("[sandbox mode] routing client email to", env.REZA_EMAIL, "(original:", client.email + ")");
+  }
+
   // Send both in parallel; if either fails, surface a helpful error.
-  try {
-    await Promise.all([
-      sendEmail({
-        apiKey: env.RESEND_API_KEY,
-        from: env.FROM_EMAIL,
-        to: env.REZA_EMAIL,
-        replyTo: client.email,
-        subject: rezaMail.subject,
-        text: rezaMail.text,
-      }),
-      sendEmail({
-        apiKey: env.RESEND_API_KEY,
-        from: env.FROM_EMAIL,
-        to: client.email,
-        replyTo: env.REZA_EMAIL,
-        subject: clientMail.subject,
-        text: clientMail.text,
-      }),
-    ]);
-  } catch (e) {
+  // We use allSettled so we can log which one failed (and see both errors if
+  // both fail) — visible in `wrangler tail` for debugging.
+  const results = await Promise.allSettled([
+    sendEmail({
+      apiKey: env.RESEND_API_KEY,
+      from: env.FROM_EMAIL,
+      to: env.REZA_EMAIL,
+      replyTo: client.email,
+      subject: rezaMail.subject,
+      text: rezaMail.text,
+    }).then((r) => ({ target: "reza", to: env.REZA_EMAIL, ...r })),
+    sendEmail({
+      apiKey: env.RESEND_API_KEY,
+      from: env.FROM_EMAIL,
+      to: clientDestination,
+      replyTo: env.REZA_EMAIL,
+      subject: clientMailSubject,
+      text: clientMailText,
+    }).then((r) => ({ target: "client", to: clientDestination, ...r })),
+  ]);
+
+  const failed = results.filter((r) => r.status === "rejected");
+  if (failed.length > 0) {
+    for (const r of failed) {
+      console.log("[email send failed]", r.reason && (r.reason.message || r.reason));
+    }
+    const detail = failed.map((r) => String((r.reason && r.reason.message) || r.reason)).join(" | ");
     return json(
-      { error: "email send failed", detail: String(e.message || e) },
+      { error: "email send failed", detail },
       { status: 502 },
       corsHeaders(request, env)
     );
+  }
+  for (const r of results) {
+    if (r.status === "fulfilled") {
+      console.log("[email sent]", r.value.target, "->", r.value.to);
+    }
   }
 
   return json(
