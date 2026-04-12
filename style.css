@@ -488,9 +488,23 @@ img {
 /* ═══════════════ ABOUT SECTION ═══════════════ */
 .about-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: auto 1.5fr 1fr;
     gap: 60px;
     align-items: start;
+}
+
+.about-photo {
+    position: sticky;
+    top: calc(var(--nav-height) + 24px);
+}
+
+.about-photo img {
+    width: 280px;
+    height: auto;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--border-light);
+    box-shadow: var(--shadow-md);
+    object-fit: cover;
 }
 
 .about-lead {
@@ -772,6 +786,11 @@ img {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
+}
+
+/* Centre a single resource card */
+.resources-grid .resource-card:only-child {
+    grid-column: 2 / 3;
 }
 
 /* Blog grid: 3-column with centered incomplete last row */
@@ -1226,6 +1245,15 @@ img {
     .about-grid {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+
+    .about-photo {
+        position: static;
+        text-align: center;
+    }
+
+    .about-photo img {
+        width: 220px;
     }
 
     .about-skills {
